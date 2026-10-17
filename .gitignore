@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+# 忽略毕业设计文档
+/docs/
