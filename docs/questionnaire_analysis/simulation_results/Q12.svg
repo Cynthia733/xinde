@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+<rect width="100%" height="100%" fill="white"/>
+<text x="700" y="35" font-family="SimSun,serif" font-size="32" dominant-baseline="central" text-anchor="middle">Q12 选项分布｜全体有效受访者</text>
+<text x="700" y="80" font-family="SimSun,serif" font-size="30" dominant-baseline="central" text-anchor="middle">模拟数据，仅供流程测试</text>
+<text x="20" y="150" font-family="SimSun,serif" font-size="25" dominant-baseline="central" text-anchor="start">A. 作品与章节分类管理</text>
+<rect x="750" y="131" width="346.15384615384613" height="38" fill="#ccc" stroke="black"/>
+<text x="1106.1538461538462" y="150" font-family="SimSun,serif" font-size="23" dominant-baseline="central" text-anchor="start">10（33.33%）</text>
+<text x="20" y="215" font-family="SimSun,serif" font-size="25" dominant-baseline="central" text-anchor="start">B. 自动保存与历史版本恢复</text>
+<rect x="750" y="196" width="276.9230769230769" height="38" fill="#ccc" stroke="black"/>
+<text x="1036.923076923077" y="215" font-family="SimSun,serif" font-size="23" dominant-baseline="central" text-anchor="start">8（26.67%）</text>
+<text x="20" y="280" font-family="SimSun,serif" font-size="25" dominant-baseline="central" text-anchor="start">C. 人物、世界观及大纲资料管理</text>
+<rect x="750" y="261" width="450.0" height="38" fill="#ccc" stroke="black"/>
+<text x="1210.0" y="280" font-family="SimSun,serif" font-size="23" dominant-baseline="central" text-anchor="start">13（43.33%）</text>
+<text x="20" y="345" font-family="SimSun,serif" font-size="25" dominant-baseline="central" text-anchor="start">D. TXT稿件导入与导出</text>
+<rect x="750" y="326" width="242.30769230769232" height="38" fill="#ccc" stroke="black"/>
+<text x="1002.3076923076924" y="345" font-family="SimSun,serif" font-size="23" dominant-baseline="central" text-anchor="start">7（23.33%）</text>
+<text x="20" y="410" font-family="SimSun,serif" font-size="25" dominant-baseline="central" text-anchor="start">E. 写作字数、进度及目标统计</text>
+<rect x="750" y="391" width="207.69230769230768" height="38" fill="#ccc" stroke="black"/>
+<text x="967.6923076923076" y="410" font-family="SimSun,serif" font-size="23" dominant-baseline="central" text-anchor="start">6（20.0%）</text>
+<text x="20" y="475" font-family="SimSun,serif" font-size="25" dominant-baseline="central" text-anchor="start">F. 简洁、专注的正文编辑界面</text>
+<rect x="750" y="456" width="346.15384615384613" height="38" fill="#ccc" stroke="black"/>
+<text x="1106.1538461538462" y="475" font-family="SimSun,serif" font-size="23" dominant-baseline="central" text-anchor="start">10（33.33%）</text>
+<text x="20" y="540" font-family="SimSun,serif" font-size="25" dominant-baseline="central" text-anchor="start">G. 其他（请填写）</text>
+<rect x="750" y="521" width="311.53846153846155" height="38" fill="#ccc" stroke="black"/>
+<text x="1071.5384615384614" y="540" font-family="SimSun,serif" font-size="23" dominant-baseline="central" text-anchor="start">9（30.0%）</text>
+<line x1="750" y1="120" x2="750" y2="575" stroke="black"/>
+<line x1="750" y1="575" x2="1200" y2="575" stroke="black"/>
+<line x1="750.0" y1="575" x2="750.0" y2="582" stroke="black"/>
+<text x="750.0" y="600" font-family="SimSun,serif" font-size="22" dominant-baseline="central" text-anchor="middle">0</text>
+<line x1="957.6923076923076" y1="575" x2="957.6923076923076" y2="582" stroke="black"/>
+<text x="957.6923076923076" y="600" font-family="SimSun,serif" font-size="22" dominant-baseline="central" text-anchor="middle">6</text>
+<line x1="1200.0" y1="575" x2="1200.0" y2="582" stroke="black"/>
+<text x="1200.0" y="600" font-family="SimSun,serif" font-size="22" dominant-baseline="central" text-anchor="middle">13</text>
+<text x="975.0" y="635" font-family="SimSun,serif" font-size="24" dominant-baseline="central" text-anchor="middle">选择人数（人）</text>
+<text x="700" y="760" font-family="SimSun,serif" font-size="25" dominant-baseline="central" text-anchor="middle">模拟数据，仅供流程测试；有效答题人数 n=30</text>
+<text x="700" y="795" font-family="SimSun,serif" font-size="24" dominant-baseline="central" text-anchor="middle">百分比分母为本题有效答题人数；多选百分比合计可超过100%。</text>
+</svg>

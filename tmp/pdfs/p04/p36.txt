@@ -1,0 +1,141 @@
+ Du  Wei,  Li  Peixuan,  Li  Boqun,  et  al.  UOR:  Universal  backdoor
+attacks  on  pre-trained  language  models[J].  arXiv  preprint,  arXiv:
+2305.09574, 2023
+［60］
+ Du Wei, Zhao Yichun, Li Boqun, et al. PPT: Backdoor attacks on pre-
+trained  models  via  poisoned  prompt  tuning[C]//Proc  of  the  31st  Int
+Joint  Conf  on  Artificial  Intelligence.  Palo  Alto,  CA:  International
+Joint  Conference  on  Artificial  Intelligence  Organization,  2022:
+680−686
+［61］
+ Cai  Xiangrui,  Xu  Haidong,  Xu  Sihan,  et  al.  BadPrompt:  Backdoor
+attacks  on  continuous  prompts[J].  arXiv  preprint,  arXiv:
+2211.14719, 2022
+［62］
+ Zhao  Shuai,  Wen  Jinming,  Tuan  L  A,  et  al.  Prompt  as  triggers  for
+backdoor  attack:  Examining  the  vulnerability  in  language
+models[C]//Proc of the 28th Conf on Empirical Methods in Natural
+Language Processing. Stroudsburg, PA: ACL, 2023: 12303−12317
+［63］
+ Mei Kai, Li Zheng, Wang Zhenting, et al. NOTABLE: Transferable
+backdoor  attacks  against  prompt-based  NLP  models[J].  arXiv
+preprint, arXiv: 2305.17826, 2023
+［64］
+ Xu  Jiashu,  Ma  M  D,  Wang  Fei,  et  al.  Instructions  as  backdoors:
+Backdoor  vulnerabilities  of  instruction  tuning  for  large  language
+models[J]. arXiv preprint, arXiv: 2305.14710, 2023
+［65］
+ Yan Jun, Yadav V, Li Shiyang, et al. Backdooring instruction-tuned
+large  language  models  with  virtual  prompt  injection[J].  arXiv
+preprint, arXiv: 2307.16888, 2024
+［66］
+ Rando  J,  Tramèr  F.  Universal  jailbreak  backdoors  from  poisoned
+human feedback[J]. arXiv preprint, arXiv: 2311.14455, 2024
+［67］
+ Yang  Wenkai,  Bi  Xiaohan,  Lin  Yankai,  et  al.  Watch  out  for  your
+agents!  Investigating  backdoor  threats  to  LLM-based  agents[J].
+arXiv preprint, arXiv: 2402.11208, 2024
+［68］
+ Wang Yifei, Xue Dizhan, Zhang Shengjie, et al. BadAgent: Inserting
+and  activating  backdoor  attacks  in  LLM  agents[J].  arXiv  preprint,
+arXiv: 2406.03007, 2024
+［69］
+ Yao Yunzhi, Wang Peng, Tian Bozhong, et al. Editing large language
+models:  Problems,  methods,  and  opportunities[C]//Proc  of  the  28th
+Conf  on  Empirical  Methods  in  Natural  Language  Processing.
+Stroudsburg, PA: ACL, 2023: 10222−10240
+［70］
+ Zhang  Ningyu,  Yao  Yunzhi,  Tian  Bozhong,  et  al.  A  comprehensive
+study  of  knowledge  editing  for  large  language  models[J].  arXiv
+preprint, arXiv: 2401.01286, 2024
+［71］
+ Li  Yanzhou,  Li  Tianlin,  Chen  Kangjie,  et  al.  BadEdit:  Backdooring
+large  language  models  by  model  editing[J].  arXiv  preprint,  arXiv:
+2403.13355, 2024
+［72］
+ Qiu Jiyang, Ma Xinbei, Zhang Zhuosheng, et al. MEGen: Generative
+backdoor  in  large  language  models  via  model  editing[J].  arXiv
+preprint, arXiv: 2408.10722, 2024
+［73］
+ Wang  Hao,  Guo  Shangwei,  He  Jialing,  et  al.  EvilEdit:  Backdooring
+text-to-image  diffusion  models  in  one  second[C]//Proc  of  the  32nd
+ACM Int Conf on Multimedia. New York: ACM, 2024: 3657−3665
+［74］
+ Barreno  M,  Nelson  B,  Sears  R,  et  al.  Can  machine  learning  be
+secure?[C]//Proc  of  the  1st  ACM  Symp  on  Information,  Computer
+and Communications Security. New York: ACM, 2006: 16−25
+［75］
+ Wang  Gang,  Wang  Tianyi,  Zheng  Haitao,  et  al.  Man  vs.  machine:
+Practical  adversarial  detection  of  malicious  crowdsourcing
+［76］
+workers[C]//Proc  of  the  23rd  USENIX  Security  Symp  (USENIX
+Security 2014). Berkeley, CA: USENIX Association, 2014: 239−254
+ Miao Chenglin, Li Qi, Xiao Houping, et al. Towards data poisoning
+attacks  in  crowd  sensing  systems[C]//Proc  of  the  18th  ACM  Int
+Symp  on  Mobile  Ad  Hoc  Networking  and  Computing.  New  York:
+ACM, 2018: 111−120
+［77］
+ Feng  Ji,  Cai  Qizhi,  Zhou  Zhihua.  Learning  to  confuse:  Generating
+training  time  adversarial  data  with  auto-encoder[J].  arXiv  preprint,
+arXiv: 1905.09027, 2019
+［78］
+ Shafahi A, Huang W R, Najibi M, et al. Poison frogs! Targeted clean-
+label poisoning attacks on neural networks[J]. arXiv preprint, arXiv:
+1804.00792, 2018
+［79］
+ Zhu  Chen,  Huang  W  R,  Li  Hengduo,  et  al.  Transferable  clean-label
+poisoning attacks on deep neural nets[C]//Proc of the 36th Int Conf
+on Machine Learning. New York: PMLR, 2019: 7614−7623
+［80］
+ Wallace E, Zhao T Z, Feng S, et al. Concealed data poisoning attacks
+on NLP Models[J]. arXiv preprint, arXiv: 2010.12563, 2020
+［81］
+ Jagielski  M,  Severi  G,  Pousette  Harger  N,  et  al.  Subpopulation  data
+poisoning  attacks[C]//Proc  of  the  28th  ACM  SIGSAC  Conf  on
+Computer  and  Communications  Security.  New  York:  ACM,  2021:
+3104−3122
+［82］
+ Schuster  R,  Song  C,  Tromer  E,  et  al.  You  autocomplete  me:
+Poisoning  vulnerabilities  in  neural  code  completion[C]//Proc  of  the
+30th USENIX Security Symp (USENIX Security 21). Berkeley, CA:
+USENIX Association, 2021: 1559−1575
+［83］
+ He Pengfei, Xu Han, Xing Yue, et al. Data poisoning for in-context
+learning[J]. arXiv preprint, arXiv: 2402.02160, 2024
+［84］
+ Hendel  R,  Geva  M,  Globerson  A.  In-context  learning  creates  task
+vectors[C]//Proc of the 28th Conf on Empirical Methods in Natural
+Language Processing. Stroudsburg, PA: ACL, 2023: 9318−9333
+［85］
+ Peng  Baolin,  Li  Chunyuan,  He  Pengcheng,  et  al.  Instruction  tuning
+with GPT−4[J]. arXiv preprint, arXiv: 2304.03277, 2023
+［86］
+ Shu Manli, Wang Jiongxiao, Zhu Chen, et al. On the exploitability of
+instruction tuning[J]. arXiv preprint, arXiv: 2306.17194, 2023
+［87］
+ Wan A, Wallace E, Shen S, et al. Poisoning language models during
+instruction tuning[J]. arXiv preprint, arXiv: 2305.00944, 2023
+［88］
+ Qiang Yao, Zhou Xiangyu, Zade S Z, et al. Learning to poison large
+language models during instruction tuning[J]. arXiv preprint, arXiv:
+2402.13459, 2024
+［89］
+ Zou  Wei,  Geng  Runpeng,  Wang  Binghui,  et  al.  PoisonedRAG:
+Knowledge  poisoning  attacks  to  retrieval-augmented  generation  of
+large language models[J]. arXiv preprint, arXiv: 2402.07867, 2024
+［90］
+ Touvron H, Martin L, Stone K, et al. LLama 2: Open foundation and
+fine-tuned chat models[J]. arXiv preprint, arXiv: 2307.09288, 2023
+［91］
+ Chen  Xuanting,  Ye  Junjie,  Zu  Can.  Robustness  of  GPT  large
+language models on natural language processing tasks[J]. Journal of
+Computer  Research  and  Development,  2024,  61(5):  1128−1142  (in
+Chinese)
+（陈炫婷，叶俊杰，祖璨，等. GPT系列大语言模型在自然语言处理
+任务中的鲁棒性[J]. 计算机研究与发展，2024，61（5）：1128−1142）
+［92］
+ Huang Lei, Yu Weijiang, Ma Weitao, et al. A survey on hallucination
+in large language models: Principles, taxonomy, challenges, and open
+questions[J]. arXiv preprint, arXiv: 2311.05232, 2023
+［93］
+2014 计算机研究与发展　 2025 ，62  （8）

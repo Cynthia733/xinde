@@ -1,0 +1,15 @@
+{
+  "schema": "pdf_read_preflight/1",
+  "verdict": "UNAVAILABLE",
+  "file": "docs\\literature\\大语言模型研究现状与趋势_王耀祖.pdf",
+  "sha256": "4f60a9cf90e2361384ad98be68a5cac9b8a0fdf15d41fbfbac2f226c33f344d3",
+  "declared_page_count": 15,
+  "enumerated_page_count": 15,
+  "reader_page_count": 15,
+  "warnings": [
+    "trailing-data: 180 bytes after the final %%EOF include non-whitespace content (possible truncated incremental update)",
+    "pypdf: Multiple definitions in dictionary at byte 0x19989c for key /MediaBox"
+  ],
+  "generated_at": "2026-09-11T08:10:03.384319+00:00",
+  "tool": "pdf_read_preflight/1.0.0"
+}

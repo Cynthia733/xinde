@@ -1,0 +1,12 @@
+{
+  "schema": "pdf_read_preflight/1",
+  "verdict": "PASS",
+  "file": "docs\\literature\\大语言模型综述与展望.pdf",
+  "sha256": "d556f34ba7528d1983d386af5f1cb73745e86f4dfef346730357724c3b8fd3d8",
+  "declared_page_count": 12,
+  "enumerated_page_count": 12,
+  "reader_page_count": 12,
+  "warnings": [],
+  "generated_at": "2026-09-11T08:10:03.090568+00:00",
+  "tool": "pdf_read_preflight/1.0.0"
+}

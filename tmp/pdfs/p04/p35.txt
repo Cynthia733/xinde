@@ -1,0 +1,139 @@
+too[J]. AI Open，2024，5：208−215
+ Lu  Yao,  Bartolo  M,  Moore  A,  et  al.  Fantastically  ordered  prompts
+and  where  to  find  them:  Overcoming  few-shot  prompt  order
+sensitivity[J]. arXiv preprint, arXiv: 2104.08786, 2022
+［28］
+ Wang  Jiongxiao,  Liu  Zichen,  Park  K  H,  et  al.  Adversarial
+demonstration  attacks  on  large  language  models[J].  arXiv  preprint,
+arXiv: 2305.14950, 2023
+［29］
+ Qiang Yao, Zhou Xiangyu, Zhu Dongxiao. Hijacking large language
+models via adversarial in-context learning[J]. arXiv preprint, arXiv:
+2311.09948, 2023
+［30］
+ Shin  T,  Razeghi  Y,  Logan  IV  R  L,  et  al.  AutoPrompt:  Eliciting
+knowledge  from  language  models  with  automatically  generated
+prompts[C]//Proc of the 25th Conf on Empirical Methods in Natural
+Language Processing. Stroudsburg, PA: ACL, 2020: 4222−4235
+［31］
+ Shi  Yundi,  Li  Piji,  Yin  Changchun,  et  al.  PromptAttack:  Prompt-
+based  attack  for  language  models  via  gradient  search[J].  arXiv
+preprint, arXiv: 2209.01882, 2022
+［32］
+ Li  Nan,  Ding  Yidong,  Jiang  Haoyu,  et  al.  Jailbreak  attack  for  large
+language  models:  A  survey[J].  Journal  of  Computer  Research  and
+Development, 2024, 61(5): 1156−1181 (in Chinese)
+（李南，丁益东，江浩宇，等. 面向大语言模型的越狱攻击综述[J].
+计算机研究与发展，2024，61（5）：1156−1181）
+［33］
+ Perez  F,  Ribeiro  I.  Ignore  previous  prompt:  Attack  techniques  for
+language models[J]. arXiv preprint, arXiv: 2211.09527, 2022
+［34］
+ Shen  Xinyue,  Chen  Zeyuan,  Backes  M,  et  al.  “Do  anything  now”:
+Characterizing and evaluating in-the-wild jailbreak prompts on large
+language models[J]. arXiv preprint, arXiv: 2308.03825, 2023
+［35］
+ Gu Xiangming, Zheng Xiaosen, Pang Tianyu, et al. Agent Smith: A
+single  image  can  jailbreak  one  million  multimodal  LLM  agents
+exponentially fast[J]. arXiv preprint, arXiv: 2402.08567, 2024
+［36］
+ Zhan  Qiusi,  Liang  Zhixiang,  Ying  Zifan,  et  al.  InjecAgent:
+Benchmarking  indirect  prompt  injections  in  tool-integrated  large
+language model agents[J]. arXiv preprint arXiv: 2403.02691, 2024
+［37］
+ Wei A, Haghtalab N, Steinhardt J. Jailbroken: How does LLM safety
+training fail?[J]. arXiv preprint, arXiv: 2307.02483, 2023
+［38］
+ Liu  Yi,  Deng  Gelei,  Li  Yuekang,  et  al.  Prompt  injection  attack
+against  LLM-integrated  applications[J].  arXiv  preprint,  arXiv:
+2306.05499, 2023
+［39］
+ Abdelnabi S, Greshake K, Mishra S, et al. Not what you’ve signed up
+for:  Compromising  real-world  LLM-integrated  applications  with
+indirect  prompt  injection[C]//Proc  of  the  16th  ACM  Workshop  on
+Artificial Intelligence and Security. New York: ACM, 2023: 79−90
+［40］
+ Zou  A,  Wang  Zifan,  Kolter  J  Z,  et  al.  Universal  and  transferable
+adversarial  attacks  on  aligned  language  models[J].  arXiv  preprint,
+arXiv: 2307.15043, 2023
+［41］
+ Zhu Sicheng, Zhang Ruiyi, An Bang, et al. AutoDAN: Interpretable
+gradient-based  adversarial  attacks  on  large  language  models[J].
+arXiv preprint, arXiv: 2310.15140, 2023
+［42］
+ Dai Jiazhu, Chen Chuanshuai, Li Yufeng. A backdoor attack against
+LSTM-based  text  classification  systems[J].  IEEE  Access,  2019,  7:
+138872−138878
+［43］
+ Yang Wenkai, Lin Yankai, Li Peng, et al. Rethinking stealthiness of
+backdoor  attack  against  NLP  models[C]//Proc  of  the  59th  Annual
+［44］
+Meeting of the ACL and the 11th Int Joint Conf on Natural Language
+Processing (Volume 1: Long Papers). Stroudsburg, PA: ACL, 2021:
+5543−5557
+ Kwon  H,  Lee  S.  Textual  backdoor  attack  for  the  text  classification
+system[J].  Security  and  Communication  Networks,  2021,  2021(1):
+1−11
+［45］
+ Kurita  K,  Michel  P,  Neubig  G.  Weight  poisoning  attacks  on  pre-
+trained models[J]. arXiv preprint, arXiv: 2004.06660, 2020
+［46］
+ Chen  Xiaoyi,  Salem  A,  Chen  Dingfan,  et  al.  BadNL:  Backdoor
+attacks  against  NLP  models  with  semantic-preserving
+improvements[C]//Proc  of  the  37th  Annual  Computer  Security
+Applications Conf. New York: ACM, 2021: 554−569
+［47］
+ Lu  Hengyang,  Fan  Chenyou,  Yang  Jun,  et  al.  Where  to  attack:  A
+dynamic  locator  model  for  backdoor  attack  in  text
+classifications[C]//Proc  of  the  29th  Int  Conf  on  Computational
+Linguistics.  Gyeongju,  Republic  of  Korea:  International  Committee
+on Computational Linguistics, 2022: 984−993
+［48］
+ Qi  Fanchao,  Li  Mukai,  Chen  Yangyi,  et  al.  Hidden  Killer:  Invisible
+textual  backdoor  attacks  with  syntactic  trigger[J].  arXiv  preprint,
+arXiv: 2105.12400, 2021
+［49］
+ Qi Fanchao, Chen Yangyi, Zhang Xurui, et al. Mind the style of text!
+adversarial  and  backdoor  attacks  based  on  text  style  transfer[J].
+arXiv preprint, arXiv: 2110.07139, 2021
+［50］
+ Pan Xudong, Zhang Mi, Sheng Beina, et al. Hidden trigger backdoor
+attack  on  NLP  models  via  linguistic  style  manipulation[C]//Proc  of
+the  31st  USENIX  Security  Symp  (USENIX  Security  22).  Berkeley,
+CA: USENIX Association, 2022: 3611−3628
+［51］
+ Kirkpatrick  J,  Pascanu  R,  Rabinowitz  N,  et  al.  Overcoming
+catastrophic  forgetting  in  neural  networks[J].  Proceedings  of  the
+National Academy of Sciences, 2017, 114(13): 3521−3526
+［52］
+ Li Linyang, Song Demin, Li Xiaonan, et al. Backdoor attacks on pre-
+trained  models  by  layerwise  weight  poisoning[J].  arXiv  preprint,
+arXiv: 2108.13888, 2021
+［53］
+ Yang  Wenkai,  Li  Lei,  Zhang  Zhiyuan,  et  al.  Be  careful  about
+poisoned  word  embeddings:  Exploring  the  vulnerability  of  the
+embedding  layers  in  NLP  models[J].  arXiv  preprint,  arXiv:
+2103.15543, 2021
+［54］
+ Merity  S,  Xiong  C,  Bradbury  J,  et  al.  Pointer  sentinel  mixture
+models[J]. arXiv preprint, arXiv: 1609.07843, 2016
+［55］
+ Zhang Xinyang, Zhang Zheng, Ji Shouling, et al. Trojaning language
+models for fun and profit[C]//Proc of the 6th IEEE European Symp
+on  Security  and  Privacy  (EuroS&P).  Piscataway,  NJ:  IEEE,  2021:
+179−197
+［56］
+ Chen  Kangjie,  Meng  Yuxian,  Sun  Xiaofei,  et  al.  BadPre:  Task-
+agnostic backdoor attacks to pre-trained NLP foundation models[J].
+arXiv preprint, arXiv: 2110.02467, 2021
+［57］
+ Shen Lujia, Ji Shouling, Zhang Xuhong, et al. Backdoor pre-trained
+models can transfer to all[C]//Proc of the 28th ACM SIGSAC Conf
+on Computer and Communications Security. New York: ACM, 2021:
+3141−3158
+［58］
+ Zhang Zhengyan, Xiao Guangxuan, Li Yongwei, et al. Red alarm for
+pre-trained models: Universal vulnerability to neuron-level backdoor
+attacks[J]. Machine Intelligence Research, 2023, 20(2): 180−193
+［59］
+姜毅等：大语言模型安全与隐私风险综述 2013

@@ -1,0 +1,140 @@
+ Lin S, Hilton J, Evans O. TruthfulQA: Measuring how models mimic
+human falsehoods[J]. arXiv preprint, arXiv: 2109.07958, 2022
+［94］
+ Lee  K,  Ippolito  D,  Nystrom  A,  et  al.  Deduplicating  training  data
+makes  language  models  better[J].  arXiv  preprint,  arXiv:
+2107.06499, 2022
+［95］
+ Yu  Fangyi,  Quartey  L,  Schilder  F.  Legal  prompting:  Teaching  a
+language  model  to  think  like  a  lawyer[J].  arXiv  preprint,  arXiv:
+2212.01326, 2022
+［96］
+ Li Yunxiang, Li Zihan, Zhang Kai, et al. ChatDoctor: A medical chat
+model fine-tuned on a large language model meta-AI (LLaMA) using
+medical  domain  knowledge[J].  arXiv  preprint,  arXiv:  2303.14070,
+2023
+［97］
+ Li  Zuchao,  Zhang  Shitou,  Zhao  Hai,  et  al.  BatGPT:  A  bidirectional
+autoregessive  talker  from  generative  pre-trained  transformer[J].
+arXiv preprint, arXiv: 2307.00360, 2023
+［98］
+ Wang  Chaojun,  Sennrich  R.  On  exposure  bias,  hallucination  and
+domain  shift  in  neural  machine  translation[C]//Proc  of  the  58th
+Annual  Meeting  of  the  ACL.  Stroudsburg,  PA:  ACL,  2020:
+3544−3552
+［99］
+ Zhang  Muru,  Press  O,  Merrill  W,  et  al.  How  language  model
+hallucinations  can  snowball[J].  arXiv  preprint,  arXiv:  2305.13534,
+2023
+［100］
+ Perez  E,  Ringer  S,  Lukošiūtė  K,  et  al.  Discovering  language  model
+behaviors  with  model-written  evaluations[J].  arXiv  preprint,  arXiv:
+2212.09251, 2022
+［101］
+ Cheng  Qinyuan,  Sun  Tianxiang,  Zhang  Wenwei,  et  al.  Evaluating
+hallucinations  in  Chinese  large  language  models[J].  arXiv  preprint,
+arXiv: 2310.03368, 2023
+［102］
+ Chuang  Y  S,  Xie  Yujia,  Luo  Hongyin,  et  al.  DoLa:  Decoding  by
+contrasting  layers  improves  factuality  in  large  language  models[J].
+arXiv preprint, arXiv: 2309.03883, 2023
+［103］
+ Liu  N  F,  Lin  K,  Hewitt  J,  et  al.  Lost  in  the  middle:  How  language
+models  use  long  contexts[J].  arXiv  preprint,  arXiv:  2307.03172,
+2023
+［104］
+ Shi Weijia, Han Xiaochuang, Lewis M, et al. Trusting your evidence:
+Hallucinate  less  with  context-aware  decoding[J].  arXiv  preprint,
+arXiv: 2305.14739, 2023
+［105］
+ Li  Yifei,  Lin  Zeqi,  Zhang  Shizhuo,  et  al.  Making  large  language
+models  better  reasoners  with  step-aware  verifier[J].  arXiv  preprint,
+arXiv: 2206.02336, 2023
+［106］
+ Weng Yixuan, Zhu Minjun, Xia Fei, et al. Large language models are
+better  reasoners  with  self-verification[J].  arXiv  preprint,  arXiv:
+2212.09561, 2023
+［107］
+ Stechly  K,  Marquez  M,  Kambhampati  S.  GPT−4  doesn’t  know  it’s
+wrong:  An  analysis  of  iterative  prompting  for  reasoning
+problems[J]. arXiv preprint, arXiv: 2310.12397, 2023
+［108］
+ El-Mhamdi  E  M,  Farhadkhani  S,  Guerraoui  R,  et  al.  On  the
+impossible  safety  of  large  AI  models[J].  arXiv  preprint,  arXiv:
+2209.15259, 2023
+［109］
+ Gehman  S,  Gururangan  S,  Sap  M,  et  al.  RealToxicityPrompts:
+Evaluating  neural  toxic  degeneration  in  language  models[J].  arXiv
+preprint, arXiv: 2009.11462, 2020
+［110］
+ Wang  Boxin,  Chen  Weixin,  Pei  Hengzhi,  et  al.  DecodingTrust:  A［111］
+comprehensive  assessment  of  trustworthiness  in  GPT  models[J].
+arXiv preprint, arXiv: 2306.11698, 2023
+ Urchs S, Thurner V, Aßenmacher M, et al. How prevalent is gender
+bias  in  ChatGPT?  Exploring  German  and  English  ChatGPT
+responses[J]. arXiv preprint, arXiv: 2310.03031, 2023
+［112］
+ Nozza D, Bianchi F, Hovy D. HONEST: Measuring hurtful sentence
+completion  in  language  models[C]//Proc  of  the  19th  Conf  of  the
+North  American  Chapter  of  the  ACL:  Human  Language
+Technologies. Stroudsburg, PA: ACL, 2021: 2398−2406
+［113］
+ Nadeem M, Bethke A, Reddy S. StereoSet: Measuring stereotypical
+bias  in  pretrained  language  models[J].  arXiv  preprint,  arXiv:
+2004.09456, 2020
+［114］
+ Lucy  L,  Bamman  D.  Gender  and  representation  bias  in  GPT−3
+generated  stories[C]//Proc  of  the  3rd  Workshop  on  Narrative
+Understanding. Stroudsburg, PA: ACL, 2021: 48−55
+［115］
+ Abid  A,  Farooqi  M,  Zou  J.  Persistent  anti-Muslim  bias  in  large
+language  models[C]//Proc  of  the  2021  AAAI/ACM  Conf  on  AI,
+Ethics, and Society. New York: ACM, 2021: 298−306
+［116］
+ Patel  R,  Pavlick  E.  Was  it  “stated”  or  was  it  “claimed”?:  How
+linguistic  bias  affects  generative  language  models[C]//Proc  of  the
+26th  Conf  on  Empirical  Methods  in  Natural  Language  Processing.
+Stroudsburg, PA: ACL, 2021: 10080−10095
+［117］
+ Carlini N, Tramer F, Wallace E, et al. Extracting training data from
+large language models[C]//Proc of the 30th USENIX Security Symp
+(USENIX  Security  21).  Berkeley,  CA:  USENIX  Association.  2021:
+2633−2650
+［118］
+ Carlini  N.  A  LLM  assisted  exploitation  of  AI-guardian[J].  arXiv
+preprint, arXiv: 2307.15008, 2023
+［119］
+ Li  Jiazhao,  Yang  Yijin,  Wu  Zhuofeng,  et  al.  ChatGPT  as  an  attack
+tool: Stealthy textual backdoor attack via blackbox generative model
+trigger[J]. arXiv preprint, arXiv: 2304.14475, 2023
+［120］
+ Staab  R,  Vero  M,  Balunović  M,  et  al.  Beyond  memorization:
+Violating privacy via inference with large language models[J]. arXiv
+preprint, arXiv: 2310.07298, 2023
+［121］
+ Strubell  E,  Ganesh  A,  McCallum  A.  Energy  and  policy
+considerations for deep learning in NLP[C]//Proc of the 57th Annual
+Meeting of the ACL. Stroudsburg, PA: ACL, 2019: 3645−3650
+［122］
+ Shumailov  I,  Zhao  Y,  Bates  D,  et  al.  Sponge  examples:  Energy-
+latency  attacks  on  neural  networks[C]//Proc  of  the  2021  IEEE
+European Symp on Security and Privacy (EuroS&P). Piscataway, NJ:
+IEEE, 2021: 212−231
+［123］
+ Si W M, Backes M, Zhang Y, et al. Two-in-One: A model hijacking
+attack  against  text  generation  models[J].  arXiv  preprint,  arXiv:
+2305.07406, 2023
+［124］
+ Tirumala  K,  Markosyan  A  H,  Zettlemoyer  L,  et  al.  Memorization
+without  overfitting:  Analyzing  the  training  dynamics  of  large
+language models[J]. arXiv preprint, arXiv: 2205.10770, 2022
+［125］
+ Carlini N, Chien S, Nasr M, et al. Membership inference attacks from
+first  principles[C]//Proc  of  the  43rd  IEEE  Symp  on  Security  and
+Privacy (SP). Piscataway, NJ: IEEE, 2022: 1897−1914
+［126］
+ Fu Wenjie, Wang Huandong, Gao Chen, et al. Practical membership
+inference  attacks  against  fine-tuned  large  language  models  via  self-
+prompt calibration[J]. arXiv preprint, arXiv: 2311.06062, 2023
+［127］
+姜毅等：大语言模型安全与隐私风险综述 2015

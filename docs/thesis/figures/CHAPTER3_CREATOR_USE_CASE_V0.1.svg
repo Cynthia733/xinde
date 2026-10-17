@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1300" viewBox="0 0 1500 1300">
+<title>创作者业务用例</title>
+<desc>左右创作者符号是同一参与者的重复显示。共24个用例，无箭头关联。</desc>
+<rect width="1500" height="1300" fill="white"/>
+<rect x="200" y="30" width="1100" height="1230" fill="white" stroke="#222" stroke-width="2"/>
+<text x="750" y="70" font-family="SimSun, Songti SC, serif" font-size="38" text-anchor="middle" dominant-baseline="central" fill="#111">小说智能辅助创作系统</text>
+<line x1="145" y1="670" x2="270" y2="145" stroke="#222" stroke-width="2"/>
+<line x1="1355" y1="670" x2="1230" y2="145" stroke="#222" stroke-width="2"/>
+<line x1="145" y1="670" x2="270" y2="241" stroke="#222" stroke-width="2"/>
+<line x1="1355" y1="670" x2="1230" y2="241" stroke="#222" stroke-width="2"/>
+<line x1="145" y1="670" x2="270" y2="337" stroke="#222" stroke-width="2"/>
+<line x1="1355" y1="670" x2="1230" y2="337" stroke="#222" stroke-width="2"/>
+<line x1="145" y1="670" x2="270" y2="433" stroke="#222" stroke-width="2"/>
+<line x1="1355" y1="670" x2="1230" y2="433" stroke="#222" stroke-width="2"/>
+<line x1="145" y1="670" x2="270" y2="529" stroke="#222" stroke-width="2"/>
+<line x1="1355" y1="670" x2="1230" y2="529" stroke="#222" stroke-width="2"/>
+<line x1="145" y1="670" x2="270" y2="625" stroke="#222" stroke-width="2"/>
+<line x1="1355" y1="670" x2="1230" y2="625" stroke="#222" stroke-width="2"/>
+<line x1="145" y1="670" x2="270" y2="721" stroke="#222" stroke-width="2"/>
+<line x1="1355" y1="670" x2="1230" y2="721" stroke="#222" stroke-width="2"/>
+<line x1="145" y1="670" x2="270" y2="817" stroke="#222" stroke-width="2"/>
+<line x1="1355" y1="670" x2="1230" y2="817" stroke="#222" stroke-width="2"/>
+<line x1="145" y1="670" x2="270" y2="913" stroke="#222" stroke-width="2"/>
+<line x1="1355" y1="670" x2="1230" y2="913" stroke="#222" stroke-width="2"/>
+<line x1="145" y1="670" x2="270" y2="1009" stroke="#222" stroke-width="2"/>
+<line x1="1355" y1="670" x2="1230" y2="1009" stroke="#222" stroke-width="2"/>
+<line x1="145" y1="670" x2="270" y2="1105" stroke="#222" stroke-width="2"/>
+<line x1="1355" y1="670" x2="1230" y2="1105" stroke="#222" stroke-width="2"/>
+<line x1="145" y1="670" x2="270" y2="1201" stroke="#222" stroke-width="2"/>
+<line x1="1355" y1="670" x2="1230" y2="1201" stroke="#222" stroke-width="2"/>
+<circle cx="105" cy="580" r="23" fill="white" stroke="#222" stroke-width="2"/>
+<line x1="105" y1="603" x2="105" y2="690" stroke="#222" stroke-width="2"/>
+<line x1="65" y1="640" x2="105" y2="620" stroke="#222" stroke-width="2"/>
+<line x1="105" y1="620" x2="145" y2="640" stroke="#222" stroke-width="2"/>
+<line x1="65" y1="640" x2="65" y2="670" stroke="#222" stroke-width="2"/>
+<line x1="145" y1="640" x2="145" y2="670" stroke="#222" stroke-width="2"/>
+<line x1="105" y1="690" x2="70" y2="740" stroke="#222" stroke-width="2"/>
+<line x1="105" y1="690" x2="140" y2="740" stroke="#222" stroke-width="2"/>
+<text x="105" y="790" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">创作者</text>
+<circle cx="1395" cy="580" r="23" fill="white" stroke="#222" stroke-width="2"/>
+<line x1="1395" y1="603" x2="1395" y2="690" stroke="#222" stroke-width="2"/>
+<line x1="1355" y1="640" x2="1395" y2="620" stroke="#222" stroke-width="2"/>
+<line x1="1395" y1="620" x2="1435" y2="640" stroke="#222" stroke-width="2"/>
+<line x1="1355" y1="640" x2="1355" y2="670" stroke="#222" stroke-width="2"/>
+<line x1="1435" y1="640" x2="1435" y2="670" stroke="#222" stroke-width="2"/>
+<line x1="1395" y1="690" x2="1360" y2="740" stroke="#222" stroke-width="2"/>
+<line x1="1395" y1="690" x2="1430" y2="740" stroke="#222" stroke-width="2"/>
+<text x="1395" y="790" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">创作者</text>
+<ellipse cx="490" cy="145" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="490" y="145" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">注册与登录</text>
+<ellipse cx="490" cy="241" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="490" y="241" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">管理个人资料</text>
+<ellipse cx="490" cy="337" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="490" y="337" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">查看创作工作台</text>
+<ellipse cx="490" cy="433" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="490" y="433" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">管理作品</text>
+<ellipse cx="490" cy="529" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="490" y="529" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">管理卷与章节</text>
+<ellipse cx="490" cy="625" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="490" y="625" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">编辑与保存正文</text>
+<ellipse cx="490" cy="721" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="490" y="721" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">导入与导出稿件</text>
+<ellipse cx="490" cy="817" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="490" y="817" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">查看与恢复历史版本</text>
+<ellipse cx="490" cy="913" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="490" y="913" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">检索创作内容</text>
+<ellipse cx="490" cy="1009" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="490" y="1009" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">管理人物及人物关系</text>
+<ellipse cx="490" cy="1105" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="490" y="1105" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">管理世界观与大纲</text>
+<ellipse cx="490" cy="1201" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="490" y="1201" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">管理素材与灵感</text>
+<ellipse cx="1010" cy="145" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="1010" y="145" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">管理写作计划</text>
+<ellipse cx="1010" cy="241" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="1010" y="241" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">查看个人创作统计</text>
+<ellipse cx="1010" cy="337" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="1010" y="337" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">每日签到</text>
+<ellipse cx="1010" cy="433" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="1010" y="433" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">兑换灵石权益</text>
+<ellipse cx="1010" cy="529" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="1010" y="529" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">使用禅模式与背景音乐</text>
+<ellipse cx="1010" cy="625" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="1010" y="625" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">参与拼字房间</text>
+<ellipse cx="1010" cy="721" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="1010" y="721" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">进行大纲规划</text>
+<ellipse cx="1010" cy="817" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="1010" y="817" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">进行人物塑造</text>
+<ellipse cx="1010" cy="913" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="1010" y="913" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">进行情节构思</text>
+<ellipse cx="1010" cy="1009" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="1010" y="1009" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">进行上下文续写</text>
+<ellipse cx="1010" cy="1105" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="1010" y="1105" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">进行文本润色</text>
+<ellipse cx="1010" cy="1201" rx="220" ry="34" fill="white" stroke="#222" stroke-width="2"/>
+<text x="1010" y="1201" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="#111">进行一致性检查</text>
+</svg>

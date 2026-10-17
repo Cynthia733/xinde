@@ -1,0 +1,2650 @@
+=== PDF PAGE 1 ===
+BIG DATA RESEARCH    大数据
+2025067 - 1
+大语言模型长文本推断
+优化技术综述
+陶伟
+1 ， 2
+，  王健宗
+1
+，  张旭龙
+1
+，  瞿晓阳
+1
+1 . 平安科技 （ 深圳 ） 有限公司 ， 广东  深圳   518063 ；
+2 . 华中科技大学 ， 湖北  武汉   430070
+摘要
+随着大语言模型技术的快速发展 ， 其处理长文本输入的需求日益增加 ， 但长文本推断面临内存消耗大和时
+延高的问题 。 为提高大语言模型在长文本推断中的效率 ， 对现有优化技术进行了全面回顾和分析 。 首先 ，
+揭示了影响效率的三大关键因素 ： 一是庞大的模型体量 ， 二是具有二次计算复杂度的注意力机制操作 ， 三
+是自回归式的解码策略 。 这些因素共同制约了模型的整体性能表现 。 随后 ， 提出了一种分类方法 ， 将优化
+技术分为模型优化 、 计算优化和系统优化 ， 并详细介绍了量化 、 稀疏注意力 、 算子融合等关键技术 。 研究
+结果表明 ， 这些优化技术能有效提升长文本推断的性能 。 最后 ， 展望了未来研究方向 ， 强调了进一步优化
+大语言模型长文本推断的重要性 ， 以满足不断增长的长文本推断需求 。
+关键词
+大语言模型 ；  长文本推断 ；  模型优化 ；  计算优化 ；  系统优化
+中图分类号 ： TP 391 文献标志码 ： A doi ： 10 . 11959 /j . issn . 2096 - 0271 . 2025067
+Long-context inference optimization for 
+large language models :  a survey
+TAO Wei
+1 , 2
+,  WANG Jianzong
+1
+,  ZHANG Xulong
+1
+,  QU Xiaoyang
+1
+1 . Ping An Technology ( Shenzhen )  Co . ,  Ltd . ,  Shenzhen 518063 ,  China
+2 . Huazhong University of Science and Technology ,  Wuhan 430070 ,  China
+Abstract
+With the rapid development of large language model ( LLM )  technology ,  the demand for processing long-text inputs has 
+been increasing .  However ,  long-text inference faces challenges such as high memory consumption and latency .  To 
+improve the efficiency of LLMs in long-text inference ,  a comprehensive review and analysis of existing optimization 
+techniques were conducted .  The study first revealed three key factors that affect efficiency :  the first is the huge model 
+size ,  the second is the attention mechanism operation with quadratic computational complexity ,  and the third is the 
+autoregressive decoding strategy .  These factors together restrict the overall performance of the model .  Subsequently ,  a 
+taxonomy was proposed ,  categorizing optimization techniques into model optimization ,  computation optimization ,  and 
+system optimization ,  with detailed introductions to key technologies such as quantization ,  sparse attention ,  and 
+operator fusion .  The research results demonstrate that these optimization techniques can effectively enhance the 
+performance of long-text inference .  Finally ,  future research directions were outlined ,  emphasizing the importance of 
+72
+=== PDF PAGE 2 ===
+2025067 - 2
+STUDY  研究
+0 　　 引言
+大 语 言 模 型 （ large language model ,  
+LLM ） 是一类基于深度学习的模型 ， 专门
+用于处理和生成自然语言文本 。 其核心架
+构通常基于变换器 （ transformer ）
+[ 1 ]
+， 通
+过大量语料的预训练来学习语言中的语义
+和上下文关系 。 与传统的自然语言处理模
+型不同 ， LLM 能够高效地理解复杂句子的
+结构 ， 进行文本生成 、 翻译 、 摘要和对话
+等多种任务 。 代表性的 LLM 包括来自变换
+器 的 双 向 编 码 表 示 （ bidirectional 
+encoder representations from transfor-
+mers ,  BERT ）
+[ 2 ]
+、 生 成 式 预 训 练 变 换 器
+（ generative pre-trained transformer ,  
+GPT ）
+[ 3 - 6 ]
+系列等 ， 前者专注于语言理解 ，
+后者侧重于生成任务 。
+LLM 的应用主要分为长文本建模与长
+文本推断 。 长文本建模目标是让模型有效
+地处理并理解长文本中的信息 ， 并通过学
+习长文本中的语境来生成准确的语言表示 ，
+常用于文本摘要或者情感分析等任务 。 传
+统 的 方 法 包 括 基 于 循 环 神 经 网 络
+（ recurrent neural network ,  RNN ）、 基
+于 Transformer 的 模 型 （ 如 BERT 、
+GPT ） 或者改进的 Transformer 模型 （ 如
+Longformer 、 Reformer 等 ） 。 长文本建模
+的主要解决思路在于采用分段处理或窗口
+滑动等技术 ， 将长文本分成多个较短的片
+段 ， 逐段进行建模 ， 之后再通过聚合策略
+将信息进行整合 。 同时 ， 现代的长文本建
+模也尝试通过注意力机制来选择性地关注
+重要信息 ， 从而避免对冗长 、 无关信息的
+处理 。 长文本推断指的是通过长文本中的
+信息推理出隐含的结论或解答 ， 通常包括
+逻辑推理 、 常识推理或从多条信息中进行
+归纳推理 。 例如 ， 问题回答系统 、 情境推
+理 、 阅读理解等任务都是推断任务 ， 模型
+需要从长文本中提取关键线索 ， 推导出合
+适的答案 。 长文本推断常见的方法包括基
+于 图 神 经 网 络 （ graph neural network ,  
+GNN ） 方法建模文本中的实体关系 、 基于
+Transformer 的阅读理解模型 、 检索增强
+生 成 （ retrieval-augmented generation ,  
+RAG ） 等 。 其主要解决思路是通过构建多
+层推理模型来逐步获取信息 ， 例如通过多
+轮的推理过程来验证假设或通过外部知识
+库来补充推理信息 。 两者都需要高效的上
+下文建模 ， 且都广泛用到 Transformer 及
+其变种 。 不同之处在于它们的目标 ： 长文
+本建模任务侧重于文本的整体理解与表示 ；
+长文本推断任务侧重于从文本中进行逻辑
+推理 ， 得出结论或答案 。
+随着模型参数规模的迅速增长 ， LLM
+长文本推断展现出强大的多任务适应性和
+跨领域应用能力 ， 被广泛应用于搜索引擎 、
+智能助手 、 内容创作等领域 。 随着 LLM 长
+文本推断的应用范围越来越广泛 ， 人们对
+LLM 上下文长度的需求也越来越迫切 。 因
+为上下文长度的增加能带来很多优势 ， 包
+括 ： 能处理更长的文本段落 ， 提高总结 、
+翻译 、 代码解析等任务的连贯性 ， 同时减
+少上下文切换时的信息丢失 ， 允许模型在
+处理长文档 、 复杂对话或跨章节分析时保
+further optimizing LLMs for long-text inference to meet the growing demands of context length .
+Key words
+large language model ,  long-context inference ,  model optimization ,  computation optimization ,  system optimization
+73
+=== PDF PAGE 3 ===
+BIG DATA RESEARCH    大数据
+2025067 - 3
+持一致的语义理解和引用信息 。 研究者提
+出了很多方法来扩展 LLM 的上下文 ， 其成
+果也十分显著 。 近年来 ， LLM 的上下文长
+度 从 早 期 的 数 百 个 标 记 （ token ） 增 加 到
+如 今 的 上 万 甚 至 10 万 个 标 记 。 例 如 ，
+OpenAI 的 GPT- 4  Turbo
+[ 6 ]
+支持 128  000 个
+标记的上下文长度 。 然而 ， 过长的上下文
+也会给 LLM 的推断带来很多挑战 ， 如产生
+更高的计算和存储成本 、 可能导致推断速
+度减慢 ， 并且使 LLM 无法部署在资源受限
+的设备上 。
+为了全面了解现有的研究并激发进一
+步的研究 ， 本文系统地总结了 LLM 推断的
+现状与挑战 。 首先 ， 介绍了 LLM 的基本概
+念和知识 ， 并详细分析了 LLM 在长文本推
+断过程中的效率瓶颈 ； 然后 ， 将 LLM 长文
+本推断优化技术分为 3 个层次 （ 模型优化 、
+计算优化 、 系统优化 ） ， 并从这 3 个方向分
+别讨论了 LLM 长文本推断优化的技术 ； 最
+后 ， 展望 LLM 长文本推断优化技术未来的
+研究方向 。
+本文的主要贡献如下 。
+·  介 绍 了 LLM 的 背 景 知 识 ， 分 析 了
+LLM 在长文本推断过程中存在的显存消耗
+与推断时延问题 。
+·  将 LLM 长文本推断优化技术分为模
+型优化 、 计算优化 、 系统优化 3 类 ， 并分
+别 讨 论 了 现 有 的 LLM 长 文 本 推 断 优 化
+技术 。
+·  对 LLM 长文本推断优化技术未来的
+研究工作进行展望 ， 强调了几个需要特别
+关注的研究方向 。
+1 　　 大语言模型长文本推断概述
+LLM 的出现最早源于以 Transformer
+为基础的模型架构 ， 其使 LLM 通过自注意
+力机制理解文本中的长距离依赖 ， 从而具
+备更高效的文本理解和生成能力 。 通过大
+量的参数与语料的训练 ， LLM 在多个领域
+取得显著成果 ， 例如文本生成 、 翻译 、 摘
+要和对话 。 近年来 ， 随着模型能力的增强 ，
+LLM 开始被应用于处理更大规模的文本 ，
+如书籍 、 长篇文章和法律文档等 。 然而 ，
+当被应用于长文本推断时 ， LLM 面临很多
+挑战 ， 如计算时间 、 内存消耗等 。 如何解
+决 LLM 长文本推断问题成为现在 LLM 研
+究中的一个核心任务 。
+本节将综合介绍大语言模型长文本推
+断的背景知识 ， 首先回顾大语言模型出现
+的背景知识 ， 包括 Transformer 是如何形
+成 的 、 Transformer 的 计 算 原 理 、
+Transformer 结构的特点 、 现代 LLM 的发
+展状况等 。 然后 ， 深入分析大语言模型在
+执行长文本推断时的挑战 ， 包括 LLM 的推
+断 过 程 、 键 值 缓 存 （ key value cache ，
+KV Cache ） 的 设 计 、 长 文 本 情 况 下 可 能
+出现的挑战等 。
+1 . 1 　 大语言模型背景知识
+主流 LLM 都是基于 Transformer 框架
+构建的 。 Transformer 模型的提出源于自
+然 语 言 处 理 （ natural language 
+processing ,  NLP ） 领域对更高效 、 更精确
+模 型 的 迫 切 需 求 。 此 前 ， RNN
+[ 7 ]
+和
+LSTM
+[ 8 ]
+虽 然 在 处 理 序 列 数 据 上 有 一 定 效
+果 ， 但它们在捕捉长距离依赖时存在困难 ，
+而且由于序列处理的顺序性 ， 训练速度较
+慢 ， 无法有效并行化 。 为了解决这些问题 ，
+Google 于 2017 年 提 出 了 Transformer 模
+型
+[ 1 ]
+， 它完全基于注意力机制 ， 能够并行
+处理序列数据 ， 并通过自注意力机制捕捉
+句子中不同词之间的关系 ， 从而显著提升
+了 NLP 任务的性能和效率 ， 推动了机器翻
+74
+=== PDF PAGE 4 ===
+2025067 - 4
+STUDY  研究
+译 、 文本生成等领域的发展 。
+如 图图 11 所 示 ， 标 准 的 Transformer 架
+构由多个依次堆叠的 Transformer 模块构
+成 。 每个 Transformer 模块通常包含 3 个
+核 心 组 件 ： 多 头 自 注 意 力 机 制 （ multi-
+head self-attention ,  MHSA ） 模块 、 前馈
+神经网络 （ feed forward network ,  FFN ）
+模块以及层归一化 （ layer normalization ,  
+LN ） 模 块 。 这 些 模 块 以 级 联 方 式 工 作 ，
+每 个 模 块 接 收 前 一 模 块 的 输 出 特 征 作 为
+输 入 ， 并 通 过 内 部 的 子 模 块 对 特 征 进 行
+处 理 和 转 换 。 在 数 据 输 入 阶 段 ， 系 统 首
+先 通 过 标 记 化 处 理 将 原 始 输 入 文 本 转 换
+为 标 记 序 列 。 随 后 ， 嵌 入 层 将 这 些 标 记
+映 射 为 具 有 语 义 信 息 的 特 征 向 量 。 为 了
+保 留 序 列 的 顺 序 信 息 ， 系 统 还 会 在 输 入
+特 征 中 加 入 位 置 编 码 （ position 
+embedding ） ， 从而为每个标记的位置信息
+进行编码 。 这种结构设计使 Transformer
+能够有效处理序列数据 ， 同时保持对元素
+位置关系的敏感性 。
+Transformer 体系结构的核心概念是
+在 MHSA 模块中采用自注意力机制 。 假设
+输 入 的 token 的 词 向 量 为 X = [ x
+1
+ x
+2
+   x
+n
+] ，
+MHSA 模块会分别使用查询权重矩阵 Q
+w
+、
+键权重矩阵 K
+w
+、 值权重矩阵 V
+w
+对其进行
+线性投影 ， 得到查询矩阵 Q 、 键矩阵 K 和
+值矩阵 V ， 对于每个注意力头都会有这样
+的计算 ， 如式 （ 1 ） 所示 ：
+Q
+i
+= X W
+Q
+i
+  K
+i
+= X W
+K
+i
+  V
+i
+= X W
+V
+i
+（ 1 ）
+其中 ， W
+Q
+i
+、 W
+K
+i
+、 W
+V
+i
+为第 i 个注意力头对
+应 的 投 影 矩 阵 。 然 后 对 每 个 （ Q
+i
+,,   K
+i ,,
+  V
+i
+）
+矩阵元组进行自注意力运算 ， 其中先对查
+询矩阵 Q
+i
+和键矩阵 K
+i
+进行计算 ， 得到注意
+力权重矩阵 A
+i
+， 如式 （ 2 ） 所示 ：
+A
+i
+= A t t e n t i o n ( Q
+i
+ K
+i ) =
+Q
+i
+K
+T
+i
+d
+k
+（ 2 ）
+其中 ， d
+k
+是 token 词向量的维度 。 计算得
+到 的 注 意 力 权 重 表 示 当 前 token 与 整 个
+token 序列中其他 token 的关系 ， 也可以视
+为 整 个 token 序 列 中 其 他 token 对 当 前
+token 的影响 。 然后对注意力权重进行处
+理并与值矩阵 V
+i
+相乘 ， 得到这一个注意力
+头的特征 Z
+i
+， 如式 （ 3 ） 所示 ：
+Z
+i
+= S o f t m a x ( A
+i
++ M ) V
+i
+（ 3 ）
+其 中 ， M 矩 阵 是 掩 码 矩 阵 ， 作 用 是 确 保
+token 序列中输入 token 之后的 token 的注
+意力权重被置为 0 。 这是出于输入序列的
+因果性考虑的 ， 因为对于输入 token 之后
+的 token ， 从输入 token 的角度看 ， 属于未
+来的 token ， 未来的 token 当然不可能对现
+在的 token 产生影响 ， 所以其注意力权重
+也要被置为 0 。 使用 Softmax 函数的目的
+是 保 证 其 他 token 对 当 前 token 的 影 响 之
+和 为 1 。 注 意 力 计 算 由 于 涉 及 矩 阵 乘 法 ，
+D A 4 = 
+1
+D A 4 = 
+2
+D A 4 = 
+3
+D A 4 = 
+1
+D A 4 = 
+2
+D A 4
+= 
+= 
+= 
+= 
+3
+; *
+Add 
+
+ LayerNorm
+Add 
+
+ LayerNorm
+Feed Forward
+, = D D A 4
+8 1
+; 9
+> D ( 58 9 )
+×
+N
+图 1 　 Transformer 结构示意图
+75
+=== PDF PAGE 5 ===
+BIG DATA RESEARCH    大数据
+2025067 - 5
+其时间复杂度和空间复杂度是输入 token
+序列长度的二次方 。 最终 ， MHSA 模块将
+所有注意力头的特征进行拼接 ， 并通过线
+性变换层进行处理 ， 从而生成输出特征 Z ，
+这一过程如式 （ 4 ） 所示 ：
+Z = C o n c a t ( Z
+1
+ Z
+2
+   Z
+h ) W
+o
+（ 4 ）
+其中 ， W
+O
+是投影矩阵 。 自注意力机制的优
+势在于能够突破距离限制 ， 动态评估输入
+序列中各部分的重要性权重 。 这种特性使
+其能够有效捕捉输入文本中的长距离依赖
+和复杂语义关联 。
+在 Transformer 架构中 ， 另一个关键
+组件是 FFN 。 该模块通常接续在 MHSA 模
+块之后 ， 其由两个线性变换层构成 ， 并在
+层间引入非线性激活函数以实现更强大的
+特征表达能力 。 它从 MHSA 模块接收输出
+特征 X ， 按照式 （ 5 ） 进行处理 ：
+F F N ( X ) = W
+2
+σ ( W
+1
+X ) （ 5 ）
+其中 ， W
+1
+和 W
+2
+表示两个线性变换层的权
+重 ， σ ( × ) 表示激活函数 。
+基于 Transformer 架构 ， 研究者开始
+训练规模更大 、 数据更多的模型 ， 逐渐演
+变为如今的 LLM 。 随着计算资源的提升和
+数 据 的 积 累 ， LLM 通 过 预 训 练 和 微 调 技
+术 ， 能够生成 、 理解复杂文本并进行推理 。
+目 前 ， 热 门 的 LLM 包 括 GPT 系 列 （ 如
+GPT- 4
+[ 6 ]
+）、 BERT 及 其 改 进 版 本 （ 如
+RoBERTa
+[ 9 ]
+） ， 以 及 Google 的 PaLM
+[ 10 ]
+和
+OpenAI 的 Claude 。 这 些 模 型 广 泛 应 用 于
+文本生成 、 机器翻译 、 问答系统等领域 ，
+推动了 NLP 的快速发展 。
+1 . 2 　 大语言模型推断过程
+在 LLM 中 ， 最容易发现的消耗资源的
+组件是 FFN 模块 。 FFN 模块的参数量特别
+大 ， 例 如 ， FFN 模 块 参 数 量 在 LLaMA-
+7 B
+[ 11 ]
+模 型 中 占 63 . 01 % ， 在 LLaMA- 70 B
+模型中占 71 . 69 % 。 因此 ， 其在推断时也会
+消耗非常多的显存 ， 并花费较长的时间进
+行计算 。 此外 ， 在长文本推断中 ， 因为当
+前 LLM 的架构特性 ， 还存在其他问题 。
+图图 22 展示了当前流行的 LLM 的推断过
+程 ， 其 中 菱 形 框 内 为 每 个 输 出 的 token 。
+当 前 流 行 的 LLM 都 是 仅 解 码 器
+（ decoder-only ） 架 构 ， 这 类 架 构 通 常 通
+过自回归机制逐步生成文本序列 。 具体而
+言 ， 仅解码器架构的 LLM 的推理过程可划
+分为以下两个主要阶段 。
+·  预 取 阶 段 （ prefill stage ） ： 在 这 个
+阶 段 中 ， LLM 接 收 整 个 输 入 token 序 列 ，
+处理后得到输出序列的第一个 token 。
+·  解码阶段 （ decoding stage ） ： 在这
+个阶段中 ， LLM 将整个输入 token 序列和
+已经得到的输出 token 序列结合起来处理 ，
+得到输出序列中的下一个 token ， 这个过
+程 将 迭 代 进 行 ， 直 到 输 出 句 子 的 结 束 符
+（ <End of Sentence> ,  <EOS> ） 。
+上述 LLM 处理过程中主要的计算量集
+中在前文提到的多头自注意力计算环节 。
+由于解码阶段是迭代进行的 ， 并且无法并
+行执行 ， 由此引出了大模型推断过程中的
+第一个问题 ： 每个解码阶段都需要计算整
+1
+1
+B 9 1 , 1 5 1 , 
+KV Cache
++ *
+1
++ *
+2
++ *
+3
++ *
+4
++ *
+5
+<EOS>
+B><
+* 9
+; 9 
+1 < ;
+; 5
+< 8 图 2 　 LLM 推断流程
+76
+=== PDF PAGE 6 ===
+2025067 - 6
+STUDY  研究
+个输入 token 序列和已经得到的输出 token
+序列的键矩阵 K 和值矩阵 V ， 这会带来大
+量的冗余计算 ， 显著提高推断时延 。 为此 ，
+研究者设计出了 KV Cache 。 KV Cache 将
+输 入 token 序 列 和 已 经 得 到 的 输 出 token
+序列的键矩阵和值矩阵都缓存在图形处理
+单 元 （ graphics processing unit ,  GPU ）
+显存中 ， 当需要计算时再取出调入高速缓
+存 （ flash ） 中 。 当 计 算 出 一 个 新 的 输 出
+token 的 K 矩阵和 V 矩阵以后 ， 再将其同样
+缓存起来 ， 附加在已有的 KV Cache 后面 。
+但是 ， KV Cache 的引入 ， 在 LLM 长
+文本推断时会带来很大的挑战 。 引入 KV 
+Cache 以后 ， LLM 推断时的显存消耗与推
+断时延都与 KV Cache 的大小成正比 。 在
+长 文 本 推 断 中 ， 输 入 的 序 列 很 长 ， 导 致
+KV Cache 也很大 ， 如此大的 KV Cache 会
+带来很高的显存占用 ， 而且常常比 LLM 本
+身 的 参 数 占 用 的 显 存 还 要 高 。 例 如 ， 在
+Facebook 公司发布的 Llama 2  13 B
+[ 12 ]
+模型
+中 ， 一个长度为 128  000 个标记的序列需
+要 100  GB 显存 。 与之相比 ， 目前业界最
+流行的科研用 GPU —— Nvidia A 100 的显
+存 只 有 80  GB 。 此 外 ， 过 大 的 KV Cache
+每个解码阶段都要从内存中调入 GPU 显存
+中 ， 这个过程非常耗时 ， 且会消耗 GPU 的
+带宽 ， 导致整个推断过程的时延变得很高 。
+因此 ， 为了解决长文本推断中的显存
+占用 、 推断时延等挑战 ， 研究者探索了各
+种优化技术 ， 以更好地应对这些挑战 。
+2 　　 大语言模型长文本推断优化技术
+随着 LLM 的快速发展 ， 其在自然语言
+处理中的应用范围越来越广泛 ， 特别是在
+处理长文本推断任务时表现出强大的生成
+能力 。 然而 ， 随着模型规模的不断扩大 ，
+推断过程中的计算和内存消耗问题也日益
+凸显 ， 这不仅限制了 LLM 在资源受限环境
+中的部署 ， 还提高了推断的时延和成本 。
+因此 ， 如何提升长文本推断效率 ， 成为亟
+待解决的关键问题 。 近年来 ， 研究人员提
+出了多种优化方法 ， 包括模型优化 、 计算
+优化与系统优化 ， 极大提升了推断效率和
+适应性 。
+本章将系统综述近年来在 LLM 推断优
+化领域的主要研究进展 。 本文系统探讨了
+提升长文本推理效率的 3 类优化方法 ： ①
+模型优化 ， 改进模型架构 （ 如高效注意力
+机制 ） 和训练方式 （ 如知识蒸馏 、 量化 ） ，
+在减少参数量的同时保持精度 ； ② 计算优
+化 ， 通 过 并 行 计 算 策 略 （ 张 量 / 流 水 线 并
+行 ） 、 算子融合等技术提升计算效率 ； ③ 系
+统优化 ， 结合软硬件协同设计 （ 如分页注
+意力 、 批处理优化 ） 改善资源利用率 。 这
+些方法各具特点又相互补充 ， 共同推动了
+长文本处理在效率和质量上的突破 ， 为实
+际应用提供了重要参考 。
+2 . 1 　 模型优化
+LLM 长文本推断的模型优化主要集中
+在 3 个方面 ： 设计高效注意力机制 、 设计
+高效模型架构以及模型压缩 。 设计高效注
+意 力 机 制 包 括 共 享 attention 、 稀 疏
+attention 、 近似 attention 。 设计高效模型
+架构主要涉及混合专家 （ mix of experts ，
+MoE ）、 自 动 搜 索 模 型 架 构 以 及 设 计
+Transformer 架构替代品 。 模型压缩则主
+要包括量化技术 、 知识蒸馏等 。
+2 . 1 . 1 　设计高效注意力机制
+各种设计高效注意力机制的技术及其
+对比见 表表 11 。
+共享 attention 的核心思想是共享 LLM
+77
+=== PDF PAGE 7 ===
+BIG DATA RESEARCH    大数据
+2025067 - 7
+中 attention 计算的结果 ， 从而避免大部分
+复杂耗时的 attention 计算 ， 并节省存储这
+些计算结果所需的显存 。 该技术最早起源
+于 多 查 询 注 意 力 （ multi-query 
+attention ， MQA ）
+[ 13 ]
+论 文 。 LLM 在 进 行
+自注意力计算时 ， 需要计算多个注意力头
+的 键 矩 阵 K 和 值 矩 阵 V ， 而 MQA 让 LLM
+的 多 个 注 意 力 头 共 享 KV Cache ， 这 样 做
+能显著减少显存消耗和显存访问时间 ， 缺
+点 是 共 享 KV Cache 会 降 低 模 型 的 精 度 。
+随 后 组 查 询 注 意 力 （ group-query 
+attention ， GQA ）
+[ 14 ]
+论文进一步优化了这
+一技术 ， 它提出一种折中的方案 ， 将 LLM
+的所有注意力头分为若干分组 ， 每个组内
+共享 KV Cache ， 而组间的 KV Cache 仍不
+同 。 这样能减轻共享 KV Cache 对模型精
+度的破坏 。 除了在同层内共享 attention ，
+研 究 者 还 提 出 了 在 不 同 层 之 间 共 享
+attention 的方法 。 文献 [ 15 ] 提出在相邻的
+两层之间共享 KV Cache ， 为了降低损失 ，
+它将 KV Cache 的向量分为幅度分量和方
+向分量 ， 保持幅度分量不变 ， 只合并方向
+分量 。 对于那些高度不一致的向量 ， 保留
+它 们 ， 不 合 并 。 LCKV
+[ 16 ]
+只 计 算
+Transformer 顶 层 的 KV ， 并 共 享 给 其 他
+所 有 层 ， 将 所 有 层 的 query 与 之 配 对 。
+CLA
+[ 17 ]
+则将 LLM 的所有层分为若干组 ， 每
+一组内共享 KV Cache 。
+稀疏 attention 的核心思想是选择性关
+注 ， 即只对输入序列中的一部分位置进行
+注 意 力 计 算 ， 而 不 是 全 部 ， 其 余 位 置 的
+attention 结 果 则 置 0 处 理 。
+StreamingLLM
+[ 18 ]
+通 过 实 验 证 实 初 始 位 置
+的 token 更加重要 ， 为此作者在滑动窗口
+attention 的基础上额外保留了 KV Cache
+中初始位置的 token 。 Longformer
+[ 19 ]
+采用
+了 滑 动 窗 口 attention 和 全 局 attention 的
+结合 。 滑动窗口 attention 只对每个 token
+的局部邻域进行计算 ， 而全局 attention 则
+允许模型在某些关键位置 （ 如序列的开头
+或特定标记 ） 上保留全局信息 。 H
+2
+O
+[ 20 ]
+通
+过计算每个 token 的注意力权重之和来确
+表  1 　不同设计高效注意力机制技术比较
+分类
+共享 attention
+稀疏 attention
+近似 attention
+技术
+MQA
+[ 13 ]
+GQA
+[ 14 ]
+MiniCache
+[ 15 ]
+LCKV
+[ 16 ]
+CLA
+[ 17 ]
+StreamingLLM
+[ 18 ]
+Longformer
+[ 19 ]
+H
+2
+O
+[ 20 ]
+Infini-Transformer
+[ 21 ]
+Performer
+[ 22 ]
+LinFormer
+[ 23 ]
+LongLoRA
+[ 25 ]
+CaraServe
+[ 26 ]
+年份
+2019 年
+2023 年
+2024 年
+2024 年
+2024 年
+2023 年
+2020 年
+2024 年
+2024 年
+2020 年
+2020 年
+2023 年
+2024 年
+复杂度
+中
+中
+较高
+高
+较高
+中
+中
+高
+中
+中
+较高
+中
+较高
+效率
+高
+较高
+高
+较高
+高
+较高
+高
+较高
+高
+较高
+高
+高
+高
+精度
+中
+较高
+较高
+中
+较高
+中
+较高
+高
+高
+中
+较高
+高
+高
+成本
+低
+中
+中
+低
+中
+低
+低
+较低
+高
+低
+低
+中
+中
+可扩展性
+中
+较高
+较高
+较高
+较高
+中
+高
+高
+较高
+较高
+高
+高
+高
+灵活性
+中
+较高
+较高
+较高
+较高
+中
+高
+高
+较高
+较高
+高
+高
+高
+创新性
+中
+较高
+较高
+高
+高
+中
+高
+高
+较高
+较高
+高
+高
+高
+78
+=== PDF PAGE 8 ===
+2025067 - 8
+STUDY  研究
+定 token 的 重 要 性 ， 并 定 期 从 KV Cache
+中剔除掉 attention weight 最低的 token ，
+以维持总的 token 数量不超过预设的上限 。
+Infini-Transformer
+[ 21 ]
+采 用 当 前 输 入 与 部
+分历史输入融合的方法 ， 不同之处在于它
+缓存历史记忆时只存储了历史记忆的压缩
+结果 （ 只保存了 K - V 矩阵之间的绑定关系
+和归一化项 ） 。
+近似 attention 技术则使用各种简单的
+计算方法来代替自注意力计算中的矩阵乘
+法与 Softmax 函数等复杂的计算操作 ， 从
+而降低计算的时间复杂度和空间复杂度 。
+例 如 ， Performer
+[ 22 ]
+将 Softmax 核 函 数 分
+解为随机特征映射 ， 然后用近似的方式处
+理 Softmax 的相似度计算 。 该方式不再需
+要计算所有输入的配对关系 ， 而是通过一
+组正交随机特征来对输入进行投影 ， 并将
+这些投影后的值进行加权求和 。 这种方法
+能够将两次复杂度的 Softmax 函数近似为
+线性的矩阵投影 。  LinFormer
+[ 23 ]
+引入低秩
+分解 （ low rank adaption ,  LoRA ）
+[ 24 ]
+， 低
+秩分解的计算式见式 （ 6 ） ：
+A » P Q （ 6 ）
+其中 ， A 矩阵大小为 m ´ n ， P 矩阵大小为
+m ´ k ， Q 矩阵大小为 k ´ n ， k 是 A 矩阵的秩
+且 k 远远小于 m 和 n 。 这种方式可以将 A 矩
+阵近似为两个参数量远远小于 A 的矩阵的
+乘积 。 LinFormer 对自注意力计算中键矩
+阵 K 和值矩阵 V 应用低秩分解 ， 大大减少
+键矩阵和值矩阵的参数量 ， 从而减少内存
+消耗 ， 并且更少的参数量意味着更少的计
+算 量 ， 也 能 大 大 减 少 推 断 时 间 。
+LongLoRA
+[ 25 ]
+则是将低秩分解操作进一步
+扩展到了嵌入层和归一化层 ， 实验证明这
+样 做 能 更 好 地 适 应 长 文 本 推 断 。
+CaraServe
+[ 26 ]
+在 GPU 上维护基础模型 ， 并
+从 主 内 存 动 态 加 载 激 活 的 LoRA 适 配 器 。
+同时它采用 CPU 辅助方法 ， 在将激活的适
+配器加载到 GPU 上时 ， 会在 CPU 上尽早
+启动它们进行预填充 ； 加载完成后 ， 再切
+换到 GPU 生成  LoRA 推理 。
+2 . 1 . 2 　设计高效模型架构
+各种不同设计高效模型架构技术对比
+见 表表 22 。
+混合专家 （ MoE ）
+[ 27 ]
+技术的核心思想
+是将模型分为多个 “ 专家 ” （ 子网络 ） ， 在
+推理时只激活其中一部分专家 ， 基于输入
+动态选择 ， 在减少计算成本的同时保持模
+型性能 。 MoE 技术使用路由机制将输入的
+token 分配给特定的专家 ， 从而确保网络
+中仅有相关部分参与计算 。 这种选择性激
+活 显 著 降 低 了 浮 点 运 算 （ floating point 
+operations ,  FLOPs ） ， 同时保留了模型的
+高效表现 。 将 MoE 用于 LLM 中 FFN 的做
+法 最 早 源 于 Google 提 出 的 Switch 
+Transformer
+[ 28 ]
+， 它 将 每 个 并 行 计 算 的
+FFN 视为 MoE 中的专家 。 Google 随后又
+提 出 了 GLaM
+[ 29 ]
+， 它 是 Switch 
+Transformer 的改进版本 ， 不同之处在于
+Switch Transformer 中一个 token 只能激
+活一个专家 ， 而 GLaM 中一个 token 可以
+激 活 多 个 专 家 。 MoEfication 论 文
+[ 30 ]
+提 出
+了 一 种 将 现 有 的 非 MoE 模 型 转 化 为 MoE
+架构的方法 ， 而无须从零开始训练 。 该方
+法 通 过 对 模 型 的 FFN 进 行 专 家 分 割 ， 将
+FFN 神经元分组为不同的专家 。 BASE 论
+文
+[ 31 ]
+提出了一种优化 MoE 模型进行专家分
+配的新方法 。 其核心是通过拍卖算法解决
+专家与输入 token 的分配问题 ， 确保每个
+专家处理的 token 数量平衡 ， 以避免一些
+专 家 过 载 而 其 他 专 家 空 闲 的 情 况 出 现 。
+FactorLLM
+[ 32 ]
+先将训练后的密集 LLM 使用
+因式分解的方法分解为稀疏子网络 ， 然后
+应用 MoE 方法 ， 同时在 MoE 结构中动态
+激活部分专家 ， 以减少推理时的计算负担 。
+79
+=== PDF PAGE 9 ===
+BIG DATA RESEARCH    大数据
+2025067 - 9
+自动搜索模型结构主要用到了神经架
+构 搜 索 （ neural architecture search ,  
+NAS ） 技术
+[ 33 ]
+。 它通过搜索算法 ， 从大量
+候选架构中搜索最优的神经网络结构 、 连
+接方式和参数 ， 而不需要依赖人工设计 。
+NAS 技术可以实现模型推断时间 、 显存消
+耗以及模型精度的综合最优 ， 即在搜索到
+最高效 LLM 的同时保证模型的精度不会太
+差 。 NAS 技术最早用于传统的深度神经网
+络 ， 但近年来它也越来越频繁地被用于搜
+索 高 效 的 LLM 结 构 。 AutoTinyBERT
+[ 34 ]
+创 新 性 地 采 用 了 one-shot NAS
+[ 35 ]
+（ 一 种
+基于神经架构搜索的改进方法 ， 其核心原
+理是在训练过程中保留所有可能的操作路
+径 ， 而在推理阶段仅选择最优路径 ） 来优
+化 Transformer 架构的超参数配置 。 该方
+法应用了一种创新的批处理训练策略 ， 用
+于 训 练 超 级 预 训 练 语 言 模 型
+（ SuperPLM ） ， 并在此基础上结合进化算
+法 来 筛 选 性 能 最 优 的 子 模 型 架 构 。
+LLaMA-NAS
+[ 36 ]
+使 用 一 种 基 于 LLaMA 2 -
+7 B 使用一次性 NAS 寻找帕累托最优网络
+架 构 的 有 效 方 法 。 具 体 来 说 ， 他 们 只 对
+LLaMA 2 - 7 B 进行一次微调 ， 然后应用基
+于遗传算法的搜索来寻找更小 、 计算复杂
+度更低的网络架构 。 有些方法将 NAS 技术
+与模型压缩相结合 ， 用 NAS 技术搜索最优
+的 模 型 压 缩 方 式 。 Structural Pruning
+[ 37 ]
+将 LLM 剪 枝 视 为 一 个 多 目 标 NAS 问 题 ，
+并使用 one-shot NAS 来搜索最优解 。 此
+外 ， NAS 的搜索一般比较耗时 ， 还需要专
+门训练一个搜索用的网络 。 因此也有一些
+工作致力于在将 NAS 应用到搜索 LLM 结
+构时优化 NAS 本身 。 文献
+[ 38 ]
+提出使用不需
+要训练的指标 ， 即参数的数量作为代理指
+标来指导搜索 ， 这种方法可以大大减少搜
+索所需时间 ， 并且不需要在搜索阶段进行
+实际训练 。
+表 2 　不同设计高效模型架构技术对比
+分类
+混合专家
+自动搜索模型
+架构
+Transformer
+替代架构
+论文
+SwitchTransformer
+[ 28 ]
+GLaM
+[ 29 ]
+MoEfication
+[ 30 ]
+BASE
+[ 31 ]
+FactorLLM
+[ 32 ]
+AutoTinyBert
+[ 34 ]
+LLaMA-NAS
+[ 36 ]
+StructuralPruning
+[ 37 ]
+LiteTransformerSearch
+[ 38 ]
+S 4
+[ 39 ]
+Mamba
+[ 40 ]
+RWKV
+[ 41 ]
+xLSTM
+[ 42 ]
+minGRU&minLSTM
+[ 43 ]
+年份
+2022 年
+2022 年
+2021 年
+2021 年
+2024 年
+2021 年
+2024 年
+2023 年
+2022 年
+2021 年
+2023 年
+2023 年
+2024 年
+2024 年
+复杂度
+中
+较高
+中
+较高
+高
+高
+高
+高
+中
+高
+高
+高
+高
+中
+效率
+高
+高
+中
+高
+高
+较高
+较高
+较高
+高
+高
+高
+高
+较高
+高
+精度
+高
+较高
+中
+高
+较高
+高
+高
+高
+较高
+高
+高
+较高
+高
+中
+成本
+低
+中
+低
+中
+中
+高
+高
+高
+中
+低
+较低
+较低
+高
+低
+可扩展性
+高
+高
+中
+较高
+高
+高
+高
+高
+高
+高
+高
+较高
+较高
+中
+灵活性
+中
+较高
+中
+较高
+高
+高
+高
+高
+高
+高
+高
+较高
+较高
+中
+创新性
+高
+较高
+中
+较高
+高
+高
+高
+高
+高
+高
+高
+较高
+高
+中
+80
+=== PDF PAGE 10 ===
+2025067 - 10
+STUDY  研究
+研究者还提出了其他高效 LLM 架构来
+代 替 计 算 复 杂 的 Transformer 架 构 。 例
+如 ， 结 构 化 状 态 空 间 模 型 （ structured 
+state space model ,  S 4 ）
+[ 39 ]
+基 于 状 态 空 间
+模型 （ state space model ,  SSM ） 来建模 。
+其使用结构化的状态空间方程捕捉输入序
+列的时间动态 ， 将长序列任务的复杂性降
+低到线性 ， 从而高效处理长距离依赖任务 。
+状态空间模型本质上是递归的 ， 因此它能
+够高效地对序列数据进行计算 ， 而不需要
+像 Transformer 那样依赖全局自注意力机
+制 。 记 忆 增 强 广 播 注 意 力 （ memory-
+augmented broadcast attention ,  
+Mamba ）
+[ 40 ]
+是一种结合了记忆增强机制的
+新型注意力模型 ， 其核心思想是引入一个
+全局的记忆模块来存储和传递长程依赖信
+息 ， 而不需要对每个输入都进行全局的自
+注意力计算 。 这样 ， Mamba 能够显著降低
+计算开销 ， 同时保留捕捉长距离依赖的能
+力 。 循 环 加 权 键 值 （ recurrent weighted 
+key value ,  RWKV ） 模型
+[ 41 ]
+是一种结合了
+RNN 和 Transformer 机制的新型架构 ， 旨
+在 保 留 RNN 的 记 忆 能 力 和 Transformer
+的有效性 。 RWKV 模型将 Transformer 的
+键 值 对 结 构 引 入 RNN 中 ， 使 模 型 可 以 像
+RNN 一样逐步处理输入序列 ， 同时保留了
+Transformer 中 捕 捉 上 下 文 信 息 的 能 力 。
+xLSTM
+[ 42 ]
+是 一 种 新 型 LSTM 架 构 ， 旨 在
+将传统神经网络架构 LSTM 扩展到数十亿
+参 数 的 规 模 ， 用 它 设 计 了 两 种 LSTM 变
+体 ， 分 别 是 sLSTM 和 mLSTM 。 sLSTM
+引入了指数门控和新的存储混合技术 ， 允
+许 LSTM 修 订 其 存 储 决 策 ； mLSTM 将
+LSTM 的记忆单元从标量扩展到矩阵 ， 提
+高了存储容量 ， 并引入了协方差更新规则 ，
+使 mLSTM 可以完全并行化 。 将 sLSTM 和
+mLSTM 集 成 到 残 差 块 中 ， 就 构 建 成 了
+xLSTM 架 构 。 Feng 等
+[ 43 ]
+通 过 从 GRU 、
+LSTM 的各种门中删除它们以前的状态依
+赖 ， 以及消除对输出范围的约束的方式 ，
+简化了 GRU 和 LSTM ， 获得参数量更少的
+且能并行训练的 minGRU 和 minLSTM 。
+2 . 1 . 3 　模型压缩
+各种模型压缩技术见 表表 33 。
+量化
+[ 44 ]
+指的是将模型中数据的类型从
+高精度转变为低精度 （ 例如从 32 位浮点数
+转为 8 位整型 ） ， 低精度的数据消耗的内存
+更少且计算量更小 ， 但是也可能带来模型
+精度的严重损失 。 早期的量化主要着眼于
+模型的权重与激活值 。 GPTQ
+[ 45 ]
+是一种新
+的训练后量化方式 ， 其核心是基于梯度信
+息对量化误差进行最小化调整 。 它通过逐
+层量化模型参数并结合梯度反馈来校正量
+化后的参数 ， 这样可以有效减少模型参数
+的精度损失 。 LLM . int 8 ()
+[ 46 ]
+使用张量级量
+化 ， 将矩阵乘法视为行向量和列向量的独
+立内积序列 ， 然后对每个内积使用单独的
+量化归一化常数来提高模型精度 。 同时 ，
+对于那些离群特征维度 （ 特征幅度明显比
+其他维度大 ） ， 它保留其精度在 32 位浮点
+数 。 由于离群特征维度数量很少但是对模
+型精度影响很大 ， 将它们的精度保留在 32 位
+浮点数能够很好地维护模型精度 ， 同时不
+会 带 来 太 多 的 显 存 与 计 算 开 销 。
+SqueezeLLM
+[ 47 ]
+将这些离群特征维度提取
+出来单独作为一个稀疏矩阵 ， 其余特征维
+度则作为一个稠密矩阵 ， 然后保留稀疏矩
+阵的精度 ， 同时量化稠密矩阵到 8 位整型 。
+AWQ
+[ 48 ]
+将离群特征维度进行重排序 ， 使排
+序后非离群特征维度是物理连续的 ， 离群
+特征维度也是物理连续的 ， 然后进行混合
+精度量化 ， 非离群特征维度量化为 8 位整
+型 ， 离群特征维度保留 32 位 ， 重排序能够
+有效避免混合精度量化时的硬件效率亏损 。
+随着 LLM 技术的发展 ， KV Cache 对推断
+81
+=== PDF PAGE 11 ===
+BIG DATA RESEARCH    大数据
+2025067 - 11
+效率的影响越来越明显 ， 越来越多的量化
+技术也开始着眼于 KV Cache 。 KIVI
+[ 49 ]
+通
+过实验发现键矩阵中离群特征维度较多而
+值矩阵中离群特征维度较少 ， 因此它对键
+矩 阵 和 值 矩 阵 分 别 使 用 逐 通 道 量 化 和 逐
+token 量化 ， 将 LLM 量化到极低精度的 2 位
+整 型 ， 同 时 不 损 失 太 多 模 型 精 度 。
+MiKV
+[ 50 ]
+通过计算注意力分数矩阵中每一
+列的和 （ 与之前提到的 H
+2
+O 类似 ） 的方式
+寻找相对重要的 token ， 对于重要 token 保
+留精度为 32 位浮点数 ， 其余 token 则量化
+到 整 型 。 FlexGen
+[ 51 ]
+对 KV Cache 采 取 组
+量化 ， 将键矩阵和值矩阵分为若干分组 ，
+每个组内的量化参数保持一致 ， 从而减少
+量化过程的计算量 。
+知 识 蒸 馏
+[ 52 ]
+指 的 是 将 原 始 的 较 大 的
+LLM 作为教师模型 ， 然后重新训练一个规
+模 较 小 的 LLM ， 将 这 个 小 LLM 作 为 学 生
+模 型 去 学 习 大 LLM 的 知 识 ， 然 后 用 小
+LLM 代替大 LLM ， 这样能够以更高效的小
+LLM 来完成大 LLM 的复杂任务 。 知识蒸
+馏可分为白盒知识蒸馏与黑盒知识蒸馏 。
+白盒知识蒸馏指能够访问到教师模型的中
+间特征和输出逻辑 。 MiniLLM
+[ 53 ]
+在标准白
+盒知识蒸馏方法的基础上 ， 将前向库尔巴
+克 - 莱 布 勒 （ Kullback-Leibler ， KL ） 散
+度替换为更适合生成语言模型的后向 KL
+散 度 ， 从 而 提 高 长 文 本 生 成 时 的 质 量 。
+GKD
+[ 54 ]
+引入了广义知识蒸馏 ， 其不仅仅依
+赖于一组固定的输出序列 ， 而是利用教师
+对这些序列的反馈 ， 在其自生成的输出序
+列上训练学生 。 与监督式知识蒸馏方法不
+同 ， GKD 还提供了学生和教师之间的替代
+损失函数 ， 当学生缺乏模仿教师分布的表
+达能力时 ， 这会很有用 。 黑盒知识蒸馏指
+教师模型的中间特征和输出逻辑不可访问
+到的知识蒸馏方法 。 其仅适用于用教师模
+型学到的最终结果来训练学生模型 ， 主要
+目的是引导学生模型学习教师模型的泛化
+能力 。 MCKD
+[ 55 ]
+提出了多阶段协作知识蒸
+馏以解决小样本领域的知识蒸馏问题 。 它
+首先使用少量样本来提示 LLM 为未标记数
+据生成伪标签 ； 然后在迭代知识蒸馏过程
+的每个阶段 ， 在伪标记数据的不相交分区
+表 3 　不同模型压缩技术比较
+分类
+量化
+知识蒸馏
+论文
+GPTQ
+[ 45 ]
+LLM . int 8 ()
+[ 46 ]
+SqueezeLLM
+[ 47 ]
+AWQ
+[ 48 ]
+KIVI
+[ 49 ]
+MiKV
+[ 50 ]
+FlexGen
+[ 51 ]
+MiniLLM
+[ 53 ]
+GKD
+[ 54 ]
+MCKD
+[ 55 ]
+Lamini-LM
+[ 56 ]
+LLM-Neo
+[ 57 ]
+年份
+2022 年
+2022 年
+2023 年
+2023 年
+2024 年
+2024 年
+2023 年
+2023 年
+2023 年
+2023 年
+2023 年
+2024 年
+复杂度
+中
+中
+较高
+高
+高
+较高
+中
+较高
+高
+高
+中
+中
+效率
+中
+高
+高
+较高
+高
+中
+高
+高
+较高
+较高
+中
+高
+精度
+高
+较高
+较高
+较高
+中
+较高
+较高
+较高
+高
+较高
+较高
+较高
+成本
+中
+低
+中
+较低
+低
+中
+低
+较低
+中
+中
+较低
+中
+可扩展性
+较高
+高
+较高
+高
+较高
+中
+较高
+较高
+高
+较高
+中
+中
+灵活性
+较高
+高
+较高
+高
+较高
+中
+较高
+较高
+高
+较高
+中
+高
+创新性
+较高
+高
+较高
+高
+高
+较高
+较高
+较高
+高
+较高
+中
+中
+82
+=== PDF PAGE 12 ===
+2025067 - 12
+STUDY  研究
+上训练一对新的学生模型 ， 并在这两个学
+生模型看不见的分区生成新的和改进的伪
+标签 。 Lamini-LM
+[ 56 ]
+通过多样化的指令集
+来提炼学生模型 ， 从而学习教师模型的指
+令微调能力 ， 这些能力通常是资源需求很
+高的 ， 使用学生模型能显著降低其资源需
+求 。 知识蒸馏和低秩分解有相同的范式 ，
+LLM-Neo
+[ 57 ]
+将 低 秩 分 解 集 成 到 知 识 整 理
+中 ， 以提高知识传递的效率 。
+2 . 2 　 计算优化
+LLM 长文本推断的计算优化主要集中
+在 3 个方面 ： 并行算法 、 内存访问优化算
+法以及计算图优化 。 并行算法主要可分为
+数据并行 、 流水线并行和张量并行 。 内存
+访问优化技术包括分块和预取技术 。 计算
+图优化包括算子融合和动态早退 。
+2 . 2 . 1 　并行算法
+各种不同并行算法的对比见 表表 44 。
+数据并行的主要目的是加快 LLM 推断
+的速度 。 具体操作是将数据集分成若干个
+碎 片 分 别 放 在 多 个 GPU 上 ， 同 时 在 每 个
+GPU 上放置一份模型副本 ， 然后多个 GPU
+同时开始推断 。 早期的数据并行适用于单
+机 多 卡 的 场 景 ， 采 用 参 数 服 务 器
+（ parameter server ）
+[ 58 ]
+框 架 ， 近 来 又 发
+展出了分布式数据并行技术 ， 即在多机多
+卡 上 同 时 进 行 推 断 ， 采 用 Ring 
+AllReduce
+[ 59 ]
+的通信方式 。
+流 水 线 并 行 指 的 是 将 模 型 纵 向 拆 分 ，
+每个 GPU 只包含模型的一部分层 ， 数据在
+一个 GPU 完成运算后 ， 将输出传给下一个
+GPU 继续计算 。 GPipe
+[ 60 ]
+对每层的计算设
+计一个成本计算函数 ， 给定划分的数量 K ，
+GPipe 会根据成本计算函数将 L 层网络分
+成 K 组 ， 每组中包含一定连续的层数 。 在
+前向计算的过程中 ， GPipe 会将 batch 划
+分成 M 份相等的微批次 （ micro-batch ） ，
+在 M 个计算设备之间进行流水 。 在反向传
+播计算期间 ， 每个微批次的梯度是基于用
+于前向传播计算的模型参数计算的 ， 将来
+自所有 M 个微批次的梯度累加起来 ， 并应
+用 于 更 新 所 有 计 算 设 备 的 模 型 参 数 。
+DAPPLE
+[ 61 ]
+是 一 个 同 步 分 布 式 训 练 框 架 ，
+它结合了大型 DNN 模型的数据并行性和流
+水并行性 ， 主要思想是更早地安排反向传
+播任务 ， 从而释放用于存储相应前向传播
+任务产生的激活内存 。 对比 GPipe 的调度
+机制 ， DAPPLE 不是一次性执行所有 M 个
+表 4 　不同并行算法比较
+分类
+数据并行
+流水线并行
+张量并行
+论文
+Parameter Server
+[ 58 ]
+Ring AllReduce
+[ 59 ]
+GPipe
+[ 60 ]
+DAPPLE
+[ 61 ]
+PipeDream
+[ 62 ]
+Megatron-LM
+[ 63 ]
+Colossal AI
+[ 64 ]
+Low-bit Communication
+[ 65 ]
+年份
+2013 年
+2017 年
+2019 年
+2021 年
+2019 年
+2019 年
+2021 年
+2024 年
+复杂度
+中
+较高
+中
+高
+高
+高
+高
+高
+效率
+中
+高
+高
+较高
+高
+中
+高
+中
+精度
+高
+高
+高
+高
+较高
+高
+高
+高
+成本
+中
+较高
+低
+中
+中
+低
+高
+中
+可扩展性
+较高
+高
+较高
+高
+较高
+较高
+中
+中
+灵活性
+较高
+高
+高
+中
+较高
+中
+较高
+较高
+创新性
+中
+较高
+高
+高
+较高
+高
+高
+中
+83
+=== PDF PAGE 13 ===
+BIG DATA RESEARCH    大数据
+2025067 - 13
+微 型 批 次 （ mini-batch ） ， 而 是 在 开 始 时
+执行 K 个 mini-batch ( K  < M ) ， 从而释放
+内存压力 ， 同时到达内存使用的最高点 。
+其次 ， 严格安排一个 mini-batch 的前向传
+播后 ， 紧接着就是一个反向传播 ， 以保证
+反向传播可以提前执行 。 PipeDream
+[ 62 ]
+创
+新 性 地 采 用 了 一 前 一 后 （ one forward 
+pass followed by one backward pass ，
+1 F 1 B ） 并行计算模式 ， 该模式通过交替执
+行前向传播和反向传播来实现高效计算 。
+在 1 F 1 B 机制下 ， 前向计算与反向计算交
+错进行 ， 这种设计能够有效释放不再需要
+的中间计算结果 ， 从而优化内存使用效率 。
+张量并行指的是将模型横向拆分 ， 将
+模 型 的 每 一 层 拆 分 开 ， 放 到 不 同 的 GPU
+上 ， 每一层的计算都需要多个 GPU 合作完
+成 。 Megatron-LM
+[ 63 ]
+将多头注意力机制中
+的每个头分配到不同 GPU 上计算 ， 多层感
+知机 （ multi-layer perceptron ,  MLP ） 层
+则通过列并行和行并行的组合实现高效计
+算 ， 同时减少同步点和优化通信操作 （ 如
+all-reduce ） ， 降低通信开销 。 然而 ， 此前
+的张量并行都是 1 维张量并行 ， 即只划分
+了模型权重参数而没有划分激活值 。 为此 ，
+Colossal AI
+[ 64 ]
+实现了多维张量并行 ， 分别
+从 2 、 2 . 5 、 3 这 3 种维度进行并行计算 。 其
+中 2 维指的是同时沿着权重和激活值维度
+进行划分 。 2 . 5 维并行使用更多的处理器来
+减少 2 维并行中的通信 ， 3 维并行则是对模
+型 的 矩 阵 进 行 了 更 细 粒 度 的 划 分 。 Dong
+等
+[ 65 ]
+认为随着服务器 LLM 规模不断扩大 ，
+张量需要分布在更多设备上 ， 导致通信成
+本 大 大 增 加 ， 因 此 他 们 提 出 低 比 特 通 信
+（ low-bit communication ） ， 利 用 通 信 特
+征中的一致异常值 ， 他们引入了一种量化
+方法 ， 该方法将平均通信值从 16 位减少到
+4 . 2 位 ， 同时保留了几乎所有的原始性能 。
+2 . 2 . 2 　内存访问优化算法
+不同内存访问优化算法的对比见 表表 55 。
+分块 （ tiling ） 是一种重要的技术 ， 旨
+在将大规模计算任务分解为小块 ， 减少内
+存访问的频繁性和数据移动的开销 ， 从而
+提 高 计 算 效 率 。 FlashAttention
+[ 66 ]
+通 过 分
+块计算和 I/O 感知的优化策略 ， 显著减少
+了注意力机制中的内存访问开销 。 它将注
+意力矩阵分块加载到高速缓存 （ 如 GPU 的
+共享内存 ） 中 ， 避免了矩阵乘法频繁访问
+高时延的全局内存 ， 从而在长序列推断中
+实 现 了 更 高 的 速 度 和 更 低 的 内 存 占 用 。
+LongLoRA
+[ 25 ]
+在上下文扩展任务中引入了
+LoRA 方法 ， 并结合分块计算技术 ， 降低
+对硬件资源的需求 。 它采用切换短期注意
+力 （ shift short attention ） 机制 ， 将注意
+力计算改进为分组计算 ， 并通过分块策略
+表 5 　不同内存访问优化算法比较
+分类
+分块
+预取
+论文
+FlashAttention
+[ 66 ]
+LongLoRA
+[ 25 ]
+MLC LLM
+[ 67 ]
+LazyLLM
+[ 68 ]
+CoA
+[ 69 ]
+PRESERVE
+[ 70 ]
+年份
+2022 年
+2023 年
+2023 年
+2024 年
+2025 年
+2025 年
+复杂度
+高
+中
+中
+中
+高
+高
+效率
+高
+高
+高
+高
+较高
+高
+精度
+高
+高
+高
+高
+高
+高
+成本
+中
+中
+低
+中
+中
+中
+可扩展性
+较高
+高
+较高
+较高
+高
+较高
+灵活性
+高
+高
+高
+较高
+较高
+较高
+创新性
+高
+高
+较高
+高
+高
+较高
+84
+=== PDF PAGE 14 ===
+2025067 - 14
+STUDY  研究
+保 障 相 邻 组 间 的 信 息 共 享 。 MLC LLM
+[ 67 ]
+通过分块计算和动态形状优化 ， 减少了对
+最大输入长度的额外填充需求 ， 从而降低
+了计算量和内存使用量 。 它利用 TVM 编
+译器的优化能力 ， 实现了高效的分块矩阵
+乘法和内存规划 。
+预取技术在计算时通过提前加载数据
+或中间结果 ， 降低内存访问时延 ， 从而提
+高推断效率 。 LazyLLM
+[ 68 ]
+通过动态选择重
+要 token 的分块计算方式 ， 加速长文本推
+断过程 。 它利用预取技术 ， 提前加载和处
+理关键 token 的隐含状态 ， 从而减少不必
+要的计算 。 LazyLLM 还引入了 Aux Cache
+机制 ， 存储被剪枝 token 的隐含状态 ， 以
+高 效 恢 复 这 些 token 。 CoA （ chain-of-
+agents ）
+[ 69 ]
+通 过 多 智 能 体 协 作 ， 在 多 个
+LLM 之间利用自然语言进行信息汇聚和上
+下文推理 。 它利用预取技术 ， 提前加载和
+处理分块文本 ， 从而减少长文本推断中的
+计算开销 。 PRESERVE
+[ 70 ]
+提出将预取命令
+插入给定的计算图中 ， 使用并行流进行集
+体通信操作 。 PRESERVE 还会跟踪预取的
+数 据 ， 并 在 编 译 时 估 计 L 2 缓 存 的 使 用 情
+况 ， 以使总预取数据大小不超过预定义的
+上限 ， 以防止缓存污染 。
+2 . 2 . 3 　计算图优化
+各 种 不 同 的 计 算 图 优 化 技 术 对 比
+见 表表 66 。
+LLM 推 断 时 每 个 算 子 都 需 要 读 写 显
+存 ， 当这些算子分开执行时 ， 中间结果需
+要不断存储到显存中 ， 增加了带宽消耗 ，
+为 此 研 究 者 提 出 了 算 子 融 合 （ operator 
+fusion ） 技术 。 算子融合的主要思想是将
+模型中多个连续算子合并成单个算子 ， 这
+单个算子全部在显存中进行 ， 当计算完成
+后才一起写回内存 。 算子融合能够显著减
+少中间结果的存储和传递 ， 减少内存访问
+次 数 ， 提 高 硬 件 的 计 算 利 用 率 。
+FlashAttention
+[ 66 ]
+将 整 个 注 意 力 操 作 中 的
+算子 （ 键矩阵与查询矩阵相乘 ， Softmax 、
+注意力权重矩阵与值矩阵相乘等 ） 融合为
+一个算子 ， 并将键 、 值 、 注意力权重矩阵
+平铺为很多块 ， 从而避免完整数据加载的
+开 销 。 FlashDecoding
+[ 71 ]
+建 立 在
+FlashAttention 的基础上 ， 因为查询矩阵
+在推断时仅有一行 ， 对 GPU 的使用率非常
+低 。 因此它将键 、 值矩阵拆分成更小的块 ，
+然后使用  FlashAttention 并行计算这些小
+块中的注意力结果 ， 最后计算这些小块计
+算 结 果 的 加 权 和 作 为 最 终 的 结 果 。
+表 6 　不同计算图优化算法比较
+分类
+算子融合
+动态早退
+论文
+FlashAttention
+[ 66 ]
+FlashDecoding
+[ 71 ]
+FlashDecoding++
+[ 72 ]
+Atom
+[ 73 ]
+RPTQ
+[ 74 ]
+DeeNERT
+[ 75 ]
+Vocabulary Pruning
+[ 76 ]
+EE-LLM
+[ 77 ]
+年份
+2022 年
+2023 年
+2023 年
+2024 年
+2023 年
+2020 年
+2024 年
+2023 年
+复杂度
+高
+较高
+高
+中
+中
+中
+中
+高
+效率
+高
+高
+高
+高
+较高
+高
+较高
+高
+精度
+高
+高
+高
+高
+高
+较高
+高
+高
+成本
+中
+中
+中
+低
+中
+低
+中
+中
+可扩展性
+较高
+较高
+较高
+较高
+较高
+较高
+较高
+高
+灵活性
+高
+较高
+较高
+较高
+较高
+较高
+较高
+高
+创新性
+高
+较高
+高
+较高
+较高
+高
+较高
+高
+85
+=== PDF PAGE 15 ===
+BIG DATA RESEARCH    大数据
+2025067 - 15
+FlashDecoding++
+[ 72 ]
+进 一 步 优 化 了
+FlashDecoding ， 它 给 每 个 小 块 的 注 意 力
+计 算 中 Softmax 函 数 设 置 统 一 的 最 大 值 ，
+从而避免了不同分块中 Softmax 函数结果
+同步带来的额外开销 。 此外 ， 其他长文本
+推断优化技术中的方案可能会带来额外计
+算开销 ， 为此研究者们使用算子优化来减
+少这些开销 。 例如 ， 量化操作中需要有解
+量化的步骤 ， 而这会带来额外的计算量 。
+Atom
+[ 73 ]
+将 解 量 化 算 子 和 矩 阵 乘 法 算 子 融
+合 ， 消 除 了 解 量 化 对 计 算 效 率 的 影 响 。
+RPTQ
+[ 74 ]
+也采用和 AWQ 一样的重排序操作
+来进行混合精度量化 ， 但是文献 [ 74 ] 指出
+重排序也会带来计算开销 ， 为此它将重排
+序算子与 LLM 中的层正则化算子融合 。 当
+层正则化计算完成 ， 将要写回显存时 ， 它
+将写回后的地址改为排序后的地址 。
+动态早退 （ dynamic early exit ） 技术
+是一种根据输入数据的复杂度动态调整模
+型计算路径的方法 。 它不执行完所有的层 ，
+而是提前退出计算 ， 以减少冗余计算量 、
+提升推断效率 。 DeeBERT
+[ 75 ]
+通过在 BERT
+模型的每一层添加早退模块 ， 动态决定是
+否在当前层输出结果 。 早退决策基于当前
+层的输出置信度分数 ， 如果置信度超过预
+设阈值 ， 则提前退出推断过程 ， 从而减少
+计算量 。 Vincenti 等
+[ 76 ]
+指出现代 LLM 中的
+词汇量很大 ， 导致早退决策所需的置信度
+估计在计算上成本高昂 ， 从而降低了效率
+增 益 。 为 此 ， 他 们 提 出 Vocabulary 
+Pruning ， 在 推 断 时 为 每 个 标 记 动 态 修 剪
+词汇表 。 具体来说 ， 词汇表在初始层之一
+被修剪 ， 然后在其余的前向传播中使用较
+小 的 词 汇 表 。 EE-LLM
+[ 77 ]
+以  Megatron-
+LM 为基础 ， 实现了各种针对早退的算法
+创新和性能优化 ， 包括一种通过流水线并
+行促进早退训练目标的反向传播的轻量级
+方法 、 一种利用原始流水线计划中的空闲
+资源进行与早退层相关的计算的技术 ， 以
+及两种与  KV Cache 兼容的早退推理方法 ，
+用于自回归生成 。
+2 . 3 　 系统优化
+系统优化主要包括内存分配优化 、 异
+构资源管理以及批处理 3 个方面 。 各种不
+同系统优化算法的对比见 表表 77 。
+表 7 　不同系统优化技术比较
+分类
+内存分配优化
+异构资源管理
+批处理
+论文
+S
+3 [ 78 ]
+vLLM
+[ 79 ]
+LightLLM
+[ 80 ]
+FlexGen
+[ 51 ]
+PowerInfer
+[ 81 ]
+PowerInfer 2
+[ 82 ]
+FastDecode
+[ 83 ]
+ORCA
+[ 84 ]
+Deepspeed-fastgen
+[ 85 ]
+BatchLLM
+[ 86 ]
+年份
+2023 年
+2023 年
+2024 年
+2023 年
+2023 年
+2024 年
+2024 年
+2022 年
+2024 年
+2024 年
+复杂度
+中
+中
+较高
+中
+较高
+高
+较高
+较高
+较高
+高
+效率
+较高
+较高
+较高
+高
+高
+高
+高
+高
+高
+中
+精度
+中
+高
+高
+较高
+高
+高
+较高
+中
+中
+高
+成本
+较低
+低
+较低
+低
+较低
+较低
+较低
+较低
+较低
+高
+可扩展性
+较高
+高
+较高
+较高
+高
+高
+较高
+较高
+较高
+较高
+灵活性
+较高
+高
+较高
+较高
+高
+高
+较高
+较高
+较高
+高
+创新性
+较高
+高
+较高
+较高
+高
+高
+较高
+较高
+较高
+高
+86
+=== PDF PAGE 16 ===
+2025067 - 16
+STUDY  研究
+2 . 3 . 1 　内存分配优化
+当 LLM 推断时 ， 如果输入的上下文长
+度过长 ， 会使 KV Cache 的显存消耗量很
+大 。 此外 ， LLM 的输出文本长度通常不固
+定 ， 系统不知道应该分配多少显存 ， 导致
+显存经常浪费 。 最早的 LLM 根据每个请求
+的预设最大长度预先分配存储空间 。 但是 ，
+如果提前结束输出的生成 ， 这种方法同样
+会导致显存浪费 。 S
+3 [ 78 ]
+为每个请求预测生
+成长度的上限 ， 以减少预分配空间的浪费 。
+但是这仍然是静态的显存分配 ， 与操作系
+统的内存分配一样 ， 静态的分配策略会导
+致大量的显存碎片出现 。 为此 ， vLLM
+[ 79 ]
+模仿操作系统的内存分页操作 ， 当请求来
+临 时 ， vLLM 为 KV Cache 分 配 连 续 的 逻
+辑显存分页 ， 而这些连续的逻辑显存分页
+被映射到不连续的物理显存分页 ， 从而充
+分利用显存碎片 。 此外 ， 它还使用了写入
+时 复 制 （ copy-on-write ） 机 制 ， 即 只 有
+需要修改的时候才会复制 ， 从而大大降低
+显 存 占 用 。 在 vLLM 的 基 础 上 ，
+LightLLM
+[ 80 ]
+使 用 更 细 粒 度 的 KV Cache
+（ 将令牌的 KV 缓存作为一个单元来处理 ，
+而不是一个块 ） 存储来减少不规则边界所
+产生的浪费 。
+2 . 3 . 2 　异构资源管理
+当 GPU 显存资源紧张时 ， 可以考虑将
+部分数据卸载到异构资源 ， 如资源充足的
+CPU 内存中 。 CPU 的内存容量很大 ， 但是
+读取速度较慢 ， 因此需要谨慎考虑卸载的
+数据内容 ， 一般只有一部分数据 ， 且都是
+一 些 读 取 频 率 较 低 的 “ 冷 ” 数 据 。
+FlexGen
+[ 51 ]
+制定了一个开销模型来确定数
+据 在 CPU 和 GPU 上 计 算 的 开 销 以 及 在
+CPU 与 GPU 之间调度的开销 ， 通过求解这
+个开销模型来确定数据分配在 CPU 和 GPU
+上的比例 ； 同时使用了流水线策略 ， 即下
+一批数据的加载和前一批数据的存储可以
+与当前批的计算重叠 。 文献 [ 81 ] 通过实验
+研究发现 ，  LLM 中仅有少量神经元 （ 定
+义为热神经元 ） 在不同输入条件下保持持
+续激活状态 ， 而其余大部分神经元 （ 定义
+为冷神经元 ） 的激活状态与具体输入内容
+相关 。 基于这一发现 ， PowerInfer
+[ 81 ]
+采用
+了 一 种 创 新 的 GPU-CPU 混 合 推 理 架 构 ：
+将频繁激活的热神经元预先加载至 GPU 以
+实现快速访问 ， 而将输入依赖型的冷神经
+元 交 由 CPU 进 行 计 算 处 理 。
+PowerInfer 2
+[ 82 ]
+在 PowerInfer 的 基 础 上 ，
+进一步设计了一个多态神经元引擎 ， 可以
+适应 LLM 推断的各个阶段的计算策略 。 此
+外 ， 它引入了分段神经元缓存和细粒度神
+经元集群级流水线 ， 有效地减少和隐藏了
+由不同存储介质之间调度的 I/O 操作引起
+的开销 。 FastDecode
+[ 83 ]
+发明了一个序列级
+负载稳定调度器 ， 以最大限度地减少 CPU
+和 GPU 的空转 。 CPU 上的工作负载与它维
+护的序列的总长度成正比 。 为了保持时延
+稳定 ， 序列按照工作负载控制算法输入系
+统 。 短 序 列 和 长 序 列 由 CPU 工 作 单 元
+（ CPU worker ） 同时处理 ， 使序列的总长
+度保持稳定 。
+2 . 3 . 3 　批处理
+LLM 在线服务应用常常需要处理来自
+多个用户的请求 ， 此时需要将多个请求作
+为一个批次一起推理 。 然而 ， 每个请求的
+输出文本长度不同 ， 即使一些请求序列长
+度很短 ， 它们仍然需要等待输出较长的请
+求结束后才能返回 ， 这些请求会增加很多
+响应时延 。 ORCA
+[ 84 ]
+创新性地采用了连续
+批处理机制 ， 该技术充分利用服务场景中
+的请求异步特性 ， 在较短输出请求完成时
+立即终止处理 ， 转而对新到达请求进行批
+87
+=== PDF PAGE 17 ===
+BIG DATA RESEARCH    大数据
+2025067 - 17
+处理 。 在该框架中 ， 每个请求的计算过程
+由多个迭代组成 ， 每个迭代对应预填充或
+解码阶段 。 基于这一设计 ， 研究者进一步
+提 出 了 迭 代 级 别 的 跨 请 求 批 处 理 方 案 。
+Deepspeed-fastgen
+[ 85 ]
+在 此 基 础 上 引 入 了
+分割融合技术 ， 该技术首先将较长的预填
+充请求在序列维度进行切分 ， 随后与多个
+短解码请求进行混合批处理 。 这种创新方
+法有效平衡了不同迭代间的工作负载 ， 并
+通过消除新请求等待时间显著降低了系统
+尾部时延 。 BatchLLM
+[ 86 ]
+在全局范围内明
+确标识公共前缀 ， 共享相同前缀的请求将
+被一起调度以最好地重用 KV 上下文 。 同
+时它重新排序请求 ， 并首先调度具有较大
+解码比例的请求 ， 以便更好地将解码令牌
+与后面的预填充块混合 ， 并应用以内存为
+中心的令牌批处理来扩大令牌批处理大小 ，
+这 有 助 于 提 高 GPU 的 利 用 率 。 最 后 ，
+BatchLLM 使用水平融合优化前缀共享注
+意内核 ， 以减少尾部效应和内核启动开销 。
+3 　　 总结与展望
+随着 LLM 技术的高速发展 ， 其能处理
+的上下文越来越长 。 然而在 LLM 推断时如
+果输入文本很长 ， 可能会导致显存消耗显
+著增加和推断时延显著提高等一系列问题 。
+如何优化 LLM 在长文本推断时的效率 ， 成
+为现在 LLM 研究领域的一个关键挑战 。
+现 有 的 技 术 主 要 可 以 分 为 模 型 优 化 、
+计算优化 、 系统优化 3 类 。 每种优化方法
+都有不同的侧重点 ， 适用于不同的场景 ，
+并且在性能 、 效率 、 硬件要求等方面有所
+不同 。 模型优化通过设计高效注意力机制 、
+设计高效模型架构以及模型压缩等技术 ，
+能够在保持较高推理精度的同时显著减少
+模型参数量和计算量 ， 但其开发成本较高 ，
+且过度优化可能导致精度损失和泛化能力
+下降 。 计算优化则专注于提升硬件利用率
+和推理速度 ， 通过并行算法 、 内存访问优
+化算法以及计算图优化等技术实现高效计
+算 ， 但其效果高度依赖于硬件架构 ， 移植
+到其他平台可能需要重新优化 ， 且性能提
+升有限 。 系统优化通过内存分配优化 、 异
+构资源管理以及批处理等技术 ， 能够高效
+调度资源和支持大规模部署 ， 但其实现复
+杂度高 ， 部署和维护成本较高 ， 且对单次
+推理的性能提升可能不如模型优化和计算
+优化显著 。
+总之 ， 虽然当前的优化技术已经取得
+了许多进展 ， 但是仍然存在模型精度下降
+较多 、 实现复杂度较高 、 实现过于依赖特
+定硬件 、 优化力度不够等问题 ， 目前仍有
+大量潜在的研究方向值得探索 。
+首先是稀疏性与动态激活 。 虽然稀疏
+计算能够减少计算量 ， 但如何更智能地动
+态选择稀疏激活路径 ， 进一步减少冗余计
+算 ， 仍 是 一 个 关 键 问 题 。 利 用 MoE 等 架
+构 ， 可以在不牺牲精度的情况下更高效地
+进行推断 ， 未来可以探索如何在更多任务
+和更大规模的模型中应用这种方法 。
+其次是长程依赖的高效捕捉 。 现有技
+术如 S 4
+[ 39 ]
+和 Linformer
+[ 23 ]
+等通过状态空间
+模型或低秩近似优化长文本的处理效率 ，
+但如何在长程依赖与局部信息之间找到更
+优的平衡 ， 依然需要更深入的理论与实践
+研究 ， 特别是在提升推理速度的同时保持
+生成任务的准确性 。
+接着是能效优化与硬件适配 。 尽管当
+前的低精度量化技术 （ 如 GPTQ
+[ 45 ]
+、 LLM .
+int 8 ()
+[ 46 ]
+） 在减少能耗方面表现突出 ， 但如
+何 更 好 地 结 合 硬 件 特 性 ， 如 适 应 不 同
+GPU 、 张量处理单元 （ tensor processing 
+unit ,  TPU ） 的计算架构来优化推理 ， 仍有
+提升空间 。 硬件加速器专用优化算法的设
+88
+=== PDF PAGE 18 ===
+2025067 - 18
+STUDY  研究
+计将成为未来模型推理中的一大关键领域 。
+最后是记忆增强与上下文存储 。 长文
+本推断的一个挑战是如何高效管理长程记
+忆 。 如 Mamba
+[ 40 ]
+曾经采用了一种在推理过
+程中使用全局记忆模块的方式 ， 但如何将
+这些模块进一步优化 ， 以适应极长的上下
+文输入 ， 是未来需要重点研究的方向 。
+综上所述 ， LLM 长文本推断要求在现
+有优化技术上进行不断的创新和改进 。 未
+来的研究可以围绕智能动态激活 、 长程依
+赖处理 、 硬件加速和记忆增强技术展开 ，
+从而更好地应对未来 LLM 长文本推断带来
+的挑战 ， 确保推断时的高效性和准确性 。
+参考文献 ：
+[ 1 ] VASWANI A ,  SHAZEER N ,  PARMAR 
+N ,  et al .  Attention is all you need [ C ] //
+Proceedings of the 31 st International 
+Conference on Neural Information Pro ‐
+cessing Systems .  New York :  ACM ,  
+2017 :  6000  - 6010 .
+[ 2 ] DEVLIN J ,  CHANG M W ,  LEE K ,  et al .  
+BERT :  pre-training of deep bidirec ‐
+tional transformers for language under ‐
+standing [ EB ].  arXiv preprint ,  2018 ,  
+arXiv :  1810 . 04805 .
+[ 3 ] RADFORD A ,  NARASIMHAN K .  Im ‐
+proving language understanding by gen ‐
+erative pre-training [ Z ].  2018 .
+[ 4 ] RADFORD A ,  WU J ,  CHILD R ,  et al .  
+Language models are unsupervised mul ‐
+titask learners [ J ].  OpenAI Blog ,  2019 ,  1
+( 8 ):  9 .
+[ 5 ] BROWN T B .  Language models are few-
+shot learners [ EB ].  arXiv preprint ,  2020 ,  
+arXiv : 2005 . 14165 .
+[ 6 ] ACHIAM J ,  ADLER S ,  AGARWAL S ,  et 
+al .  Gpt- 4  technical report [ EB ].  arXiv 
+preprint ,  2023 ,  arXiv : 2303 . 08774 .
+[ 7 ] ELMAN J .  Finding structure in time [ J ].  
+Cognitive Science ,  1990 ,  14 ( 2 ):  179 - 211 .
+[ 8 ] GRAVES A .  Supervised sequence label ‐
+ling with recurrent neural networks [ M ].  
+Heidelberg :  Springer ,  2012 .
+[ 9 ] LIU Y H ,  OTT M ,  GOYAL N ,  et al .  Ro ‐
+BERTa :  a robustly optimized BERT 
+pretraining approach [ EB ].  arXiv pre ‐
+print ,  2019 ,  arXiv :  1907 . 11692 .
+[ 10 ] CHOWDHERY A ,  NARANG S R ,  
+DEVLIN J ,  et al .  PaLM :  scaling language 
+modeling with pathways [ EB ].  arXiv pre ‐
+print ,  2022 ,  arXiv :  2204 . 02311 .
+[ 11 ] TOUVRON H ,  LAVRIL T ,  IZACARD G ,  
+et al .  LLaMA :  open and efficient foun ‐
+dation language models [ EB ].  arXiv pre ‐
+print ,  2023 ,  arXiv :  2302 . 13971 .
+[ 12 ] TOUVRON H ,  MARTIN L ,  STONE K ,  
+et al .  Llama 2 :  Open foundation and 
+fine-tuned chat models [ J ].  [ EB ].  arXiv 
+preprint ,  2023 ,  arXiv : 2307 . 09288 .
+[ 13 ] SHAZEER N .  Fast transformer decod ‐
+ing :  one write-head is all you need [ EB ].  
+arXiv preprint ,  2019 ,  arXiv :  1911 . 02150 .
+[ 14 ] AINSLIE J ,  LEE-THORP J ,  DE JONG 
+M ,  et al .  GQA :  training generalized 
+multi-query transformer models from 
+multi-head checkpoints [ EB ].  arXiv pre ‐
+print ,  2023 ,  arXiv :  2305 . 13245 .
+[ 15 ] LIU A ,  LIU J ,  PAN Z Z ,  et al .  Mini ‐
+Cache :  KV cache compression in depth 
+dimension for large language models
+[ EB ].  arXiv preprint ,  2024 ,  arXiv :  
+2405 . 14366 .
+[ 16 ] WU H Y ,  TU K W .  Layer-condensed KV 
+cache for efficient inference of large 
+language models [ C ] //Proceedings of the 
+62 nd Annual Meeting of the Association 
+for Computational Linguistics .  Strouds ‐
+burg :  ACL ,  2024 :  11175 - 11188 .
+89
+=== PDF PAGE 19 ===
+BIG DATA RESEARCH    大数据
+2025067 - 19
+[ 17 ] BRANDON W ,  MISHRA M ,  NRUSIMHA 
+A ,  et al .  Reducing transformer key-
+value cache size with cross-layer atten ‐
+tion [ EB ].  arXiv preprint ,  2024 ,  arXiv :  
+2405 . 12981 .
+[ 18 ] XIAO G X ,  TIAN Y D ,  CHEN B D ,  et al .  
+Efficient streaming language models 
+with attention sinks [ EB ].  arXiv preprint ,  
+2023 ,  arXiv :  2309 . 17453 .
+[ 19 ] BELTAGY I ,  PETERS M E ,  COHAN A .  
+Longformer :  the long-document trans ‐
+former [ EB ].  arXiv preprint ,  2020 ,  
+arXiv :  2004 . 05150 .
+[ 20 ] ZHANG Z Y ,  SHENG Y ,  ZHOU T Y ,  et 
+al .  H
+2
+O :  heavy-hitter oracle for effi ‐
+cient generative inference of large lan ‐
+guage models [ C ] //Advances in Neural 
+Information Processing Systems .  [ S . l .: s .
+n .],  2024 .
+[ 21 ] MUNKHDALAI T ,  FARUQUI M ,  GOPAL 
+S .  Leave No context behind :  efficient 
+infinite context transformers with infini-
+attention [ EB ].  arXiv preprint ,  2024 ,  
+arXiv :  2404 . 07143 .
+[ 22 ] CHOROMANSKI K ,  LIKHOSHERSTOV 
+V ,  DOHAN D ,  et al .  Rethinking atten ‐
+tion with performers [ EB ].  arXiv pre ‐
+print ,  2020 ,  arXiv :  2009 . 14794 .
+[ 23 ] WANG S N ,  LI B Z ,  KHABSA M ,  et al .  
+Linformer :  self-attention with linear 
+complexity [ EB ].  arXiv preprint ,  2020 ,  
+arXiv :  2006 . 04768 .
+[ 24 ] HU E J ,  SHEN Y ,  WALLIS P ,  et al .  
+Lora :  low-rank adaptation of large lan ‐
+guage models [ EB ].  arXiv preprint ,  
+2021 ,  arXiv :  2106 . 09685 .
+[ 25 ] CHEN Y K ,  QIAN S J ,  TANG H T ,  et 
+al .  LongLoRA :  efficient fine-tuning of 
+long-context large language models [ EB ].  
+arXiv preprint ,  2023 ,  arXiv :  
+2309 . 12307 .
+[ 26 ] LI S Y ,  LU H F ,  WU T Y ,  et al .  
+CaraServe :  CPU-assisted and rank-
+aware LoRA serving for generative LLM 
+inference [ EB ].  arXiv preprint ,  2024 ,  
+arXiv :  2401 . 11240 .
+[ 27 ] SHAZEER N ,  MIRHOSEINI A ,  
+MAZIARZ K ,  et al .  Outrageously large 
+neural networks :  the sparsely-gated 
+mixture-of-experts layer [ EB ].  arXiv 
+preprint ,  2017 ,  arXiv :  1701 . 06538 .
+[ 28 ] FEDUS W ,  ZOPH B ,  SHAZEER N .  
+Switch transformers :  scaling to trillion 
+parameter models with simple and effi ‐
+cient sparsity [ J ].  Journal of Machine 
+Learning Research ,  2022 ,  23 ( 120 ):  1 - 39 .
+[ 29 ] DU N ,  HUANG Y P ,  DAI A M ,  et al .  
+GLaM :  efficient scaling of language 
+models with mixture-of-experts [ EB ].  
+arXiv preprint ,  2021 ,  arXiv :  2112 . 06905 .
+[ 30 ] ZHANG Z Y ,  LIN Y K ,  LIU Z Y ,  et al .  
+MoEfication :  transformer feed-forward 
+layers are mixtures of experts [ EB ].  
+arXiv preprint ,  2021 ,  arXiv :  2110 . 01786 .
+[ 31 ] LEWIS M ,  BHOSALE S ,  DETTMERS T ,  
+et al .  BASE layers :  simplifying training 
+of large ,  sparse models [ EB ].  arXiv pre ‐
+print ,  2021 ,  arXiv :  2103 . 16716 .
+[ 32 ] ZHAO Z Y ,  DONG M H ,  ZHANG R Y ,  et 
+al .  FactorLLM :  factorizing knowledge 
+v i a  mixture of experts for large lan ‐
+guage models [ EB ].  arXiv preprint ,  
+2024 ,  arXiv :  2408 . 11855 .
+[ 33 ] ZOPH B ,  LE Q V ,  MATHUR V ,  et al .  
+Neural architecture search with rein ‐
+forcement learning [ EB ].  arXiv preprint ,  
+2016 ,  arXiv :  1611 . 01578 .
+[ 34 ] YIN Y C ,  CHEN C ,  SHANG L F ,  et al .  
+AutoTinyBERT :  automatic hyper-
+parameter optimization for efficient pre-
+trained language models [ EB ].  arXiv pre ‐
+print ,  2021 ,  arXiv :  2107 . 13686 .
+90
+=== PDF PAGE 20 ===
+2025067 - 20
+STUDY  研究
+[ 35 ] BENDER G ,  KINDERMANS P J ,  ZOPH 
+B ,  et al .  Understanding and simplifying 
+one-shot architecture search [ C ] //Pro ‐
+ceedings of the International Conference 
+on Machine Learning .  [ S . l .: s . n .],  2018 :  
+550 - 559 .
+[ 36 ] SARAH A ,  SRIDHAR S N ,  SZANKIN M ,  
+et al .  LLaMA-NAS :  efficient neural ar ‐
+chitecture search for large language 
+models [ EB ].  arXiv preprint ,  2024 ,  
+arXiv :  2405 . 18377 .
+[ 37 ] KLEIN A ,  GOLEBIOWSKI J ,  MA X C ,  
+et al .  Structural pruning of pre-trained 
+language models v i a  neural architecture 
+search [ EB ].  arXiv preprint ,  2024 ,  
+arXiv :  2405 . 02267 .
+[ 38 ] JAVAHERIPI M ,  DE ROSA G ,  
+MUKHERJEE S ,  et al .  LiteTransform ‐
+erSearch :  training-free neural archi ‐
+tecture search for efficient language 
+models [ J ].  Advances in Neural Informa ‐
+tion Processing Systems ,  2022 ,  35 :  
+24254 - 24267 .
+[ 39 ] GU A ,  GOEL K ,  R É  C .  Efficiently mod ‐
+eling long sequences with structured 
+state spaces [ EB ].  arXiv preprint ,  2021 ,  
+arXiv :  2111 . 00396 .
+[ 40 ] GU A ,  DAO T .  Mamba :  linear-time se ‐
+quence modeling with selective state 
+spaces [ EB ].  arXiv preprint ,  2023 ,  
+arXiv :  2312 . 00752 .
+[ 41 ] PENG B ,  ALCAIDE E ,  ANTHONY Q ,  et 
+al .  RWKV :  reinventing RNNs for the 
+transformer era [ EB ].  arXiv preprint ,  
+2023 ,  arXiv :  2305 . 13048 .
+[ 42 ] BECK M ,  P Ö PPEL K ,  SPANRING M ,  et 
+al .  xLSTM :  extended long short-term 
+memory [ EB ].  arXiv preprint ,  2024 ,  
+arXiv :  2405 . 04517 .
+[ 43 ] FENG L ,  TUNG F ,  AHMED M O ,  et al .  
+Were RNNs all we needed ?  [ EB ].  arXiv 
+preprint ,  2024 ,  arXiv :  2410 . 01201 .
+[ 44 ] HAN S ,  MAO H Z ,  DALLY W J .  Deep 
+compression :  compressing deep neural 
+networks with pruning ,  trained quanti ‐
+zation and huffman coding [ EB ].  arXiv 
+preprint ,  2015 ,  arXiv :  1510 . 00149 .
+[ 45 ] FRANTAR E ,  ASHKBOOS S ,  HOEFLER 
+T ,  et al .  GPTQ :  accurate post-training 
+quantization for generative pre-trained 
+transformers [ EB ].  arXiv preprint ,  2022 ,  
+arXiv :  2210 . 17323 .
+[ 46 ] DETTMERS T ,  LEWIS M ,  BELKADA 
+Y ,  et al .  LLM . int 8 ():  8 -bit matrix multi ‐
+plication for transformers at scale [ EB ].  
+arXiv preprint ,  2022 ,  arXiv :  2208 . 07339 .
+[ 47 ] KIM S ,  HOOPER C ,  GHOLAMI A ,  et al .  
+SqueezeLLM :  dense-and-sparse quan ‐
+tization [ EB ].  arXiv preprint ,  2023 ,  
+arXiv :  2306 . 07629 .
+[ 48 ] LIN J ,  TANG J M ,  TANG H T ,  et al .  
+AWQ :  activation aware weight quanti ‐
+zation for LLM compression and accel ‐
+eration [ EB ].  arXiv preprint ,  2023 ,  
+arXiv : 2306 . 00978 .
+[ 49 ] LIU Z R ,  YUAN J Y ,  JIN H Y ,  et al .  
+KIVI :  a tuning-free asymmetric 2 bit 
+quantization for KV cache [ EB ].  arXiv 
+preprint ,  2024 ,  arXiv :  2402 . 02750 .
+[ 50 ] YANG J Y ,  KIM B ,  BAE J ,  et al .  No to ‐
+ken left behind :  reliable KV cache com ‐
+pression v i a  importance-aware mixed 
+precision quantization [ EB ].  arXiv pre ‐
+print ,  2024 ,  arXiv :  2402 . 18096 .
+[ 51 ] SHENG Y ,  ZHENG L M ,  YUAN B H ,  et 
+al .  Flexgen :  high-throughput genera ‐
+tive inference of large language models 
+with a single GPU [ C ] //Proceedings of 
+the International Conference on Machine 
+Learning .  [ S . l .: s . n .],  2023 :  31094 - 31116 .
+[ 52 ] HINTON G ,  VINYALS O ,  DEAN J .  Dis ‐
+tilling the knowledge in a neural network
+91
+=== PDF PAGE 21 ===
+BIG DATA RESEARCH    大数据
+2025067 - 21
+[ EB ].  arXiv preprint ,  2015 ,  arXiv :  
+1503 . 02531 .
+[ 53 ] GU Y X ,  DONG L ,  WEI F R ,  et al .  Mini ‐
+LLM :  knowledge distillation of large 
+language models [ EB ].  arXiv preprint ,  
+2023 ,  arXiv :  2306 . 08543 .
+[ 54 ] AGARWAL R ,  VIEILLARD N ,  
+STA Ń CZYK P ,  et al .  GKD :  generalized 
+knowledge distillation for auto-
+regressive sequence models [ EB ].  arXiv 
+preprint ,  2023 ,  arXiv :  2306 . 13649 .
+[ 55 ] ZHAO J C ,  ZHAO W L ,  DROZDOV A ,  et 
+al .  Multistage collaborative knowledge 
+distillation from a large language model 
+for semi-supervised sequence generation
+[ EB ].  arXiv preprint ,  2023 ,  arXiv :  
+2311 . 08640 .
+[ 56 ] WU M H ,  WAHEED A ,  ZHANG C Y ,  et 
+al .  LaMini-LM :  a diverse herd of dis ‐
+tilled models from large-scale instruc ‐
+tions [ EB ].  arXiv preprint ,  2023 ,  arXiv :  
+2304 . 14402 .
+[ 57 ] YANG R M ,  WU T Q ,  WANG J H ,  et al .  
+LLM-NEO :  parameter efficient knowl ‐
+edge distillation for large language 
+models [ EB ].  arXiv preprint ,  2024 ,  
+arXiv :  2411 . 06839 .
+[ 58 ] LI M ,  ZHOU L ,  YANG Z C ,  et al .  Pa ‐
+rameter server for distributed machine 
+learning [ C ] //Big Learning NIPS Work ‐
+shop .  [ S . l .: s . n .],  2021 .
+[ 59 ] GIBIANSKY A ,  DIAMOS G .  baidu-
+allreduce [ EB ].  GitHub ,  2017 .
+[ 60 ] HUANG Y P ,  CHENG Y L ,  BAPNA A ,  
+et al .  GPipe :  efficient training of giant 
+neural networks using pipeline parallel ‐
+ism [ EB ].  arXiv preprint ,  2018 ,  arXiv :  
+1811 . 06965 .
+[ 61 ] FAN S Q ,  RONG Y ,  MENG C ,  et al .  
+DAPPLE :  a pipelined data parallel ap ‐
+proach for training large models [ C ] //
+Proceedings of the 26 th ACM SIGPLAN 
+Symposium on Principles and Practice of 
+Parallel Programming .  New York :  ACM ,  
+2021 :  431 - 445 .
+[ 62 ] NARAYANAN D ,  HARLAP A ,  
+PHANISHAYEE A ,  et al .  PipeDream :  
+generalized pipeline parallelism for DNN 
+training [ C ] //Proceedings of the 27 th 
+ACM Symposium on Operating Systems 
+Principles .  New York :  ACM ,  2019 :  
+1 - 15 .
+[ 63 ] SHOEYBI M ,  PATWARY M ,  PURI R ,  et 
+al .  Megatron-LM :  training multi-billion 
+parameter language models using model 
+parallelism [ EB ].  arXiv preprint ,  2019 ,  
+arXiv :  1909 . 08053 .
+[ 64 ] LI S G ,  XUE F Z ,  BARANWAL C ,  et al .  
+Sequence parallelism :  long sequence 
+training from system perspective [ EB ].  
+arXiv preprint ,  2021 ,  arXiv :  2105 . 13120 .
+[ 65 ] DONG H ,  JOHNSON T ,  CHO M ,  et al .  
+T owards low-bit communication for ten ‐
+sor parallel LLM inference [ EB ].  arXiv 
+preprint ,  2024 ,  arXiv :  2411 . 07942 .
+[ 66 ] DAO T ,  FU D ,  ERMON S ,  et al .  Flash 
+attention :  fast and memory-efficient 
+exact attention with io-awareness [ J ].  
+Advances in Neural Information Pro ‐
+cessing Systems ,  2022 ,  35 :  16344 -
+16359 .
+[ 67 ] FENG S Y ,  HOU B H ,  JIN H Y ,  et al .  
+TensorIR :  an abstraction for automatic 
+tensorized program optimization [ C ] //
+Proceedings of the 28 th ACM Interna ‐
+tional Conference on Architectural Sup ‐
+port for Programming Languages and 
+Operating Systems ,  Volume 2 .  New 
+York :  ACM ,  2023 :  804 - 817 .
+[ 68 ] FU Q C ,  CHO M ,  MERTH T ,  et al .  La ‐
+zyLLM :  dynamic token pruning for effi ‐
+c ient long context LLM inference [ EB ].  
+92
+=== PDF PAGE 22 ===
+2025067 - 22
+STUDY  研究
+arXiv preprint ,  2024 ,  arXiv :  2407 . 14057 .
+[ 69 ] ZHANG Y S ,  SUN R X ,  CHEN Y F ,  et 
+al .  Chain of agents :  large language 
+models collaborating on long-context 
+tasks [ J ].  Advances in Neural Information 
+Processing Systems ,  2025 ,  37 :  132208 -
+132237 .
+[ 70 ] Y Ü Z Ü G Ü LER A C ,  ZHUANG J W ,  
+CAVIGELLI L .  PRESERVE :  prefetching 
+model weights and KV-cache in distrib ‐
+uted LLM serving [ EB ].  arXiv preprint ,  
+2025 ,  arXiv :  2501 . 08192 .
+[ 71 ] DAO T ,  HAZIZA D ,  MASSA F ,  et al .  
+Flash-decoding for long-context infer ‐
+ence [ Z ].  2023 .
+[ 72 ] HONG K ,  DAI G H ,  XU J M ,  et al .  
+FlashDecoding++ :  faster large language 
+model inference on GPUs [ EB ].  arXiv 
+preprint ,  2023 ,  arXiv :  2311 . 01282 .
+[ 73 ] ZHAO Y L ,  LIN C Y ,  ZHU K ,  et al .  
+Atom :  low-bit quantization for efficient 
+and accurate LLM serving [ J ].  Proceed ‐
+ings of Machine Learning and Systems ,  
+2024 ,  6 :  196 - 209 .
+[ 74 ] YUAN Z H ,  NIU L ,  LIU J W ,  et al .  
+RPTQ :  reorder-based post-training 
+quantization for large language models
+[ EB ].  arXiv preprint ,  2023 ,  arXiv :  
+2304 . 01089 .
+[ 75 ] XIN J ,  TANG R ,  LEE J ,  et al .  Dee ‐
+BERT :  dynamic early exiting for accel ‐
+erating BERT inference [ EB ].  arXiv pre ‐
+print ,  2020 ,  arXiv :  2004 . 12993 .
+[ 76 ] VINCENTI J ,  ABDEL SADEK K ,  VELJA 
+J ,  et al .  Dynamic vocabulary pruning in 
+early-exit LLMs [ EB ].  arXiv preprint ,  
+2024 ,  arXiv :  2410 . 18952 .
+[ 77 ] CHEN Y X ,  PAN X C ,  LI Y L ,  et al .  EE-
+LLM :  large-scale training and inference 
+of early-exit large language models 
+with 3 D parallelism [ EB ].  arXiv preprint ,  
+2023 ,  arXiv :  2312 . 04916 .
+[ 78 ] JIN Y ,  WU C F ,  BROOKS D ,  et al .  S
+3
+:  
+increasing GPU utilization during gen ‐
+erative inference for higher throughput
+[ J ].  Advances in Neural Information 
+Processing Systems ,  2023 ,  36 :  18015 -
+18027 .
+[ 79 ] KWON W ,  LI Z H ,  ZHUANG S Y ,  et al .  
+Efficient memory management for large 
+language model serving with PagedAt ‐
+tention [ C ] //Proceedings of the 29 th 
+Symposium on Operating Systems Prin ‐
+ciples .  New York :  ACM ,  2023 :  611 - 626 .
+[ 80 ] ModelTC .  LightLLM [ Z ].  2024 .
+[ 81 ] SONG Y X ,  MI Z Y ,  XIE H T ,  et al .  Pow ‐
+erInfer :  fast large language model serv ‐
+ing with a consumer-grade GPU [ EB ].  
+arXiv preprint ,  2023 ,  arXiv :  2312 . 12456 .
+[ 82 ] XUE Z L ,  SONG Y X ,  MI Z Y ,  et al .  
+PowerInfer- 2 :  fast large language model 
+inference on a smartphone [ EB ].  arXiv 
+preprint ,  2024 ,  arXiv :  2406 . 06282 .
+[ 83 ] HE J A ,  ZHAI J D .  FastDecode :  high-
+throughput GPU-efficient LLM serving 
+using heterogeneous pipelines [ EB ].  arXiv 
+preprint ,  2024 ,  arXiv :  2403 . 11421 .
+[ 84 ] YU G I ,  JEONG J S ,  KIM G W ,  et al .  
+Orca :  a distributed serving system for 
+{ Transformer-Based }  generative models
+[ C ] //Proceedings of the 16 th USENIX 
+Symposium on Operating Systems De ‐
+sign and Implementation .  [ S . l .: s . n .],  
+2022 :  521 - 538 .
+[ 85 ] HOLMES C ,  TANAKA M ,  WYATT M ,  
+et al .  DeepSpeed-FastGen :  high-
+throughput text generation for LLMs v i a  
+MII and DeepSpeed-inference [ EB ].  arXiv 
+preprint ,  2024 ,  arXiv :  2401 . 08671 .
+[ 86 ] ZHENG Z ,  JI X ,  FANG T S ,  et al .  
+BatchLLM :  optimizing large batched 
+LLM inference with global prefix shar ‐
+ing and throughput-oriented token 
+batching [ EB ].  arXiv preprint ,  2024 ,  
+arXiv :  2412 . 03594 .
+93
+=== PDF PAGE 23 ===
+BIG DATA RESEARCH    大数据
+2025067 - 23
+作者 简介
+陶伟 （ 1999 -  ） ， 男 ， 华中科技大学博士生 ， 主要研究方向为模型量化 、 云边协同 、 大模型时序数据应用 、
+大模型长文本推断优化等 。 在体系结构方向国际顶级会议发表论文 2 篇 ， 在人工智能方向国际顶级会议发
+表论文 1 篇 。
+王健宗 （ 1983 ‒ ） ， 男 ， 博士 ， 平安科技 （ 深圳 ） 有限公司副总工程师 ， 资深人工智能总监 ， 联邦学习技术
+部总经理 ， 智能金融前沿技术研究院院长 。 美国佛罗里达大学人工智能博士后 ， 美国莱斯大学和华中科技
+大学联合培养博士 ， 中国计算机学会资深会员 ， 中国计算机学会大数据专家委员会委员 ， 中国自动化学会
+联邦数据和联邦智能专业委员会副主任 。 主要研究方向为大模型 、 联邦学习和深度学习等 。
+张旭龙 （ 1988 ‒ ） ， 男 ， 博士 ， 平安科技 （ 深圳 ） 有限公司 ， 高级算法研究员 ， 复旦大学计算机理学博士 ，
+2023 年入选上海市东方英才计划青年项目 。 兼任深圳清华大学研究院及中国科学技术大学先进技术研究院
+校外导师 ， 中国自动化学会联邦数据与联邦智能专业委员会委员 。 目前是 IEEE 、 中国自动化学会以及中国
+计算机学会会员 。 主要研究方向为大模型 、 具身智能 、 跨模态智能计算以及模型上下文协议 （ MCP ） 等 。
+发表学术论文 80 余篇 ， 申请国家发明专利授权 20 余项 。
+瞿晓阳 （ 1988 -  ） ， 男 ， 博士 ， 平安科技 （ 深圳 ） 有限公司前沿机器学习算法分组分责人 ， 清华大学深圳国
+际研究生院校外导师 ， 中国科技大学校先进技术研究院校外导师 ， 中佛罗里达大学访问学者 ， 从事机器学
+习 、 大数据 、 体系结构方面的研究工作 ， 在语音语义分析 、 自动化机器学习 、 零样本和小样本学习 、 高性
+能计算与存储等方面经验丰富 。 在体系结构方向 （ 如 INFOCOM 、 DAC 、 IPDPS 、 TPDS ） 和人工智能方向
+（ 如 NeurIPS 、 IJCAI 、 ICASSP 、 Interspeech ） 等国际会议和期刊发表过近 50 篇文章 ， 其中 1 篇论文荣获会议
+最佳学生论文奖提名 ； 担任多个国际期刊的评委 ， 已授权专利 70 篇 ， 已出版专著 2 本 。
+收稿日 期 :  2025 - 03 - 19
+通信作 者 :  王健宗 ， jzwang@ 188 . com ； 瞿晓阳 ， quxiaoy@gmail . com
+基金项 目 :  广东省重点领域研发计划 “ 新一代人工智能 ” 重大专项 （ No . 2021 B 0101400003 ）
+Foundation Ite m :  The Key Research and Development Program of Guangdong Province ( No . 2021 B 0101400003 )
+94

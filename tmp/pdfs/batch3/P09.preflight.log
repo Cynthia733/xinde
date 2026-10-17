@@ -1,0 +1,15 @@
+{
+  "schema": "pdf_read_preflight/1",
+  "verdict": "UNAVAILABLE",
+  "file": "docs\\literature\\主体性与工具性的博弈_AI时代网络文学创作者身份的重塑_晏青.pdf",
+  "sha256": "2a41f122857da9350682af21c00146f96b419f92af18eea3f18bbe042683b4bd",
+  "declared_page_count": 13,
+  "enumerated_page_count": 13,
+  "reader_page_count": 13,
+  "warnings": [
+    "trailing-data: 176 bytes after the final %%EOF include non-whitespace content (possible truncated incremental update)",
+    "pypdf: Multiple definitions in dictionary at byte 0x174fc5 for key /MediaBox"
+  ],
+  "generated_at": "2026-09-11T08:10:03.652670+00:00",
+  "tool": "pdf_read_preflight/1.0.0"
+}

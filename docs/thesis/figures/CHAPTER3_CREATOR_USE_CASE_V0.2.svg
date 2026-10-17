@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="960" viewBox="0 0 1000 960">
+<rect width="1000" height="960" fill="white"/>
+<rect x="320" y="30" width="640" height="890" fill="white" stroke="black" stroke-width="1.8"/>
+<text x="640" y="70" font-family="SimSun, Songti SC, serif" font-size="34" text-anchor="middle" dominant-baseline="central" fill="black">小说智能辅助创作系统</text>
+<line x1="180" y1="485" x2="430" y2="150" stroke="black" stroke-width="1.8"/>
+<line x1="180" y1="485" x2="430" y2="238" stroke="black" stroke-width="1.8"/>
+<line x1="180" y1="485" x2="430" y2="326" stroke="black" stroke-width="1.8"/>
+<line x1="180" y1="485" x2="430" y2="414" stroke="black" stroke-width="1.8"/>
+<line x1="180" y1="485" x2="430" y2="502" stroke="black" stroke-width="1.8"/>
+<line x1="180" y1="485" x2="430" y2="590" stroke="black" stroke-width="1.8"/>
+<line x1="180" y1="485" x2="430" y2="678" stroke="black" stroke-width="1.8"/>
+<line x1="180" y1="485" x2="430" y2="766" stroke="black" stroke-width="1.8"/>
+<line x1="180" y1="485" x2="430" y2="854" stroke="black" stroke-width="1.8"/>
+<circle cx="135" cy="410" r="24" fill="white" stroke="black" stroke-width="1.8"/>
+<line x1="135" y1="434" x2="135" y2="535" stroke="black" stroke-width="1.8"/>
+<line x1="90" y1="485" x2="135" y2="455" stroke="black" stroke-width="1.8"/>
+<line x1="135" y1="455" x2="180" y2="485" stroke="black" stroke-width="1.8"/>
+<line x1="135" y1="535" x2="95" y2="595" stroke="black" stroke-width="1.8"/>
+<line x1="135" y1="535" x2="175" y2="595" stroke="black" stroke-width="1.8"/>
+<text x="135" y="635" font-family="SimSun, Songti SC, serif" font-size="32" text-anchor="middle" dominant-baseline="central" fill="black">创作者</text>
+<ellipse cx="670" cy="150" rx="240" ry="32" fill="white" stroke="black" stroke-width="1.8"/>
+<text x="670" y="150" font-family="SimSun, Songti SC, serif" font-size="32" text-anchor="middle" dominant-baseline="central" fill="black">管理账号与工作台</text>
+<ellipse cx="670" cy="238" rx="240" ry="32" fill="white" stroke="black" stroke-width="1.8"/>
+<text x="670" y="238" font-family="SimSun, Songti SC, serif" font-size="32" text-anchor="middle" dominant-baseline="central" fill="black">管理作品与章节</text>
+<ellipse cx="670" cy="326" rx="240" ry="32" fill="white" stroke="black" stroke-width="1.8"/>
+<text x="670" y="326" font-family="SimSun, Songti SC, serif" font-size="32" text-anchor="middle" dominant-baseline="central" fill="black">编辑与管理稿件</text>
+<ellipse cx="670" cy="414" rx="240" ry="32" fill="white" stroke="black" stroke-width="1.8"/>
+<text x="670" y="414" font-family="SimSun, Songti SC, serif" font-size="32" text-anchor="middle" dominant-baseline="central" fill="black">管理创作资料</text>
+<ellipse cx="670" cy="502" rx="240" ry="32" fill="white" stroke="black" stroke-width="1.8"/>
+<text x="670" y="502" font-family="SimSun, Songti SC, serif" font-size="32" text-anchor="middle" dominant-baseline="central" fill="black">管理写作计划</text>
+<ellipse cx="670" cy="590" rx="240" ry="32" fill="white" stroke="black" stroke-width="1.8"/>
+<text x="670" y="590" font-family="SimSun, Songti SC, serif" font-size="32" text-anchor="middle" dominant-baseline="central" fill="black">查看个人创作统计</text>
+<ellipse cx="670" cy="678" rx="240" ry="32" fill="white" stroke="black" stroke-width="1.8"/>
+<text x="670" y="678" font-family="SimSun, Songti SC, serif" font-size="32" text-anchor="middle" dominant-baseline="central" fill="black">参与创作激励活动</text>
+<ellipse cx="670" cy="766" rx="240" ry="32" fill="white" stroke="black" stroke-width="1.8"/>
+<text x="670" y="766" font-family="SimSun, Songti SC, serif" font-size="32" text-anchor="middle" dominant-baseline="central" fill="black">使用沉浸写作功能</text>
+<ellipse cx="670" cy="854" rx="240" ry="32" fill="white" stroke="black" stroke-width="1.8"/>
+<text x="670" y="854" font-family="SimSun, Songti SC, serif" font-size="32" text-anchor="middle" dominant-baseline="central" fill="black">使用AI辅助创作</text>
+</svg>

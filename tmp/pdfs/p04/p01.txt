@@ -1,0 +1,44 @@
+ 
+大语言模型安全与隐私风险综述
+姜　毅 1,2　杨　勇 1　印佳丽 3　刘小垒 4　李吉亮 5　王　伟 6　田有亮 7　巫英才 1　纪守领 1
+1 （浙江大学计算机科学与技术学院　杭州　310007）
+2 （贵州大学人民武装学院　贵阳　550025）
+3 （福州大学计算机与大数据学院　福州　350108）
+4 （中国工程物理研究院计算机应用研究所　四川绵阳　621054）
+5 （西安交通大学网络空间安全学院　西安　710049）
+6 （智能交通数据安全与隐私保护技术北京市重点实验室（北京交通大学）　北京　100091）
+7 （贵州大学计算机科学与技术学院　贵阳　550025）
+  （jiangyi2021@zju.edu.cn）
+Survey on Security and Privacy Risks in Large Language Models
+Jiang Yi1,2 , Yang Yong1 , Yin Jiali3 , Liu Xiaolei4 , Li Jiliang5 , Wang Wei6 , Tian Youliang7 , Wu Yingcai1 , and Ji Shouling1
+1  （College of Computer Science and Technology, Zhejiang University, Hangzhou 310007）
+2  （College of Renwu, Guizhou University, Guiyang 550025）
+3  （College of Computer Science and Big Data, Fuzhou University, Fuzhou 350108）
+4  （Institute of Computer Application, China Academy of Engineering Physics, Mianyang, Sichuan 621054）
+5  （School of Cyber Science and Engineering, Xi’an Jiaotong University, Xi’an 710049）
+6  （Beijing Key Laboratory of Security and Privacy in Intelligent Transportation (Beijing Jiaotong University), Beijing 100091）
+7  （College of Computer Science and Technology, Guizhou University, Guiyang 550025）
+Abstract　In recent years, large language models (LLMs) have emerged as a critical branch of deep learning network
+technology,  achieving  a  series  of  breakthrough  accomplishments  in  the  field  of  natural  language  processing  (NLP),
+and gaining widespread adoption. However, throughout their entire lifecycle, including pre-training, fine-tuning, and
+actual  deployment,  a  variety  of  security  threats  and  risks  of  privacy  breaches  have  been  discovered,  drawing
+increasing  attention  from  both  the  academic  and  industrial  sectors.  Navigating  the  development  of  the  paradigm  of
+using large language models to handle natural language processing tasks, as known as the pre-training and fine-tuning
+paradigm,  the  pre-training  and  prompt  learning  paradigm,  and  the  pre-training  and  instruction-tuning  paradigm,  this
+article outlines conventional security threats against large language models, specifically representative studies on the
+three types of traditional adversarial attacks (adversarial example attack, backdoor attack and poisoning attack). It then
+summarizes some of the novel security threats revealed by recent research, followed by a discussion on the privacy
+risks of large language models and the progress in their research. The content aids researchers and deployers of large
+language models in identifying, preventing, and mitigating these threats and risks during the model design, training,
+and  application  processes,  while  also  achieving  a  balance  between  model  performance,  security,  and  privacy
+protection.
+Key words　 large language models (LLMs)；pre-trained language models；security；privacy；threat
+ 
+ 
+收稿日期：2024-04-18；修回日期：2025-02-17
+基金项目：国家重点研发计划项目（2022YFB3102100）；国家自然科学基金项目（U244120033, U24A20336）
+This work was supported by the National Key Research and Development Program of China (2022YFB3102100) and the National Natural Science
+Foundation of China (U244120033, U24A20336).
+通信作者： 纪守领（sji@zju.edu.cn） 
+计算机研究与发展 https://crad.ict.ac.cn
+Journal of Computer Research and Development 62（8）：1979−2018，2025

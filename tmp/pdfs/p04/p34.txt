@@ -1,0 +1,127 @@
+但通过深入研究多模态防御、智能监测机制和新型
+的差分隐私、机器遗忘技术，能够有效提高大模型的
+安全性，抵御潜在的安全威胁.
+作者贡献声明：姜毅负责文献调研和论文撰写；
+杨勇负责第5节的主要内容撰写；印佳丽、刘小垒、
+李吉亮负责论文完善与校正；王伟、田有亮、巫英才
+负责论文梳理与修改；纪守领提出研究问题，组织写
+作思路并修改论文.
+参　考　文　献 
+ Vaswani A, Shazeer N, Parmar N, et al. Attention is all you need[J].
+arXiv preprint, arXiv: 1706.03762, 2023
+［1］
+ Radford  A,  Narasimhan  K,  Salimans  T,  et  al.  Improving  language
+understanding  by  generative  pre-training[EB/OL].  2018[2024-05-
+23].  https://hayate-lab.com/wp-content/uploads/2023/05/43372bfa75
+0340059ad87ac8e538c53b.pdf
+［2］
+ Devlin  J,  Chang  M  W,  Lee  K,  et  al.  BERT:  Pre-training  of  deep
+bidirectional  Transformers  for  language  understanding[J].  arXiv
+preprint, arXiv: 1810.04805, 2019
+［3］
+ Mikolov  T,  Chen  K,  Corrado  G,  et  al.  Efficient  estimation  of  word
+representations in vector space[J]. arXiv preprint, arXiv: 1301.3781,
+2013
+［4］
+ Pennington J, Socher R, Manning C. GloVe: Global vectors for word
+representation[C]//Proc  of  the  19th  Conf  on  Empirical  Methods  in
+Natural  Language  Processing.  Stroudsburg,  PA:  ACL,  2014:
+1532−1543
+［5］
+ Chen  Huimin,  Liu  Zhiyuan,  Sun  Maosong.  The  social  opportunities
+and  challenges  in  the  era  of  large  language  models[J].  Journal  of
+Computer  Research  and  Development,  2024,  61(5):  1094−1103  (in
+Chinese)
+（陈慧敏，刘知远，孙茂松. 大语言模型时代的社会机遇与挑战[J].
+计算机研究与发展，2024，61（5）：1094−1103）
+［6］
+ Brown T B, Mann B, Ryder N, et al. Language models are few-shot
+learners[J]. arXiv preprint, arXiv: 2005.14165, 2020
+［7］
+ Morris J X, Lifland E, Yoo J Y, et al. TextAttack: A framework for
+adversarial  attacks,  data  augmentation,  and  adversarial  training  in
+NLP[J]. arXiv preprint, arXiv: 2005.05909, 2020
+［8］
+ Zeng  Guoyang,  Qi  Fanchao,  Zhou  Qianrui,  et  al.  OpenAttack:  An
+open-source  textual  adversarial  attack  toolkit[C]//Proc  of  the  59th
+Annual Meeting of the ACL and the 11th Int Joint Conf on Natural
+Language  Processing:  System  Demonstrations.  Stroudsburg,  PA:
+ACL, 2021: 363−371
+［9］
+ Wang Boxin, Xu Chejian, Wang Shuohang, et al. Adversarial GLUE:
+A  multi-task  benchmark  for  robustness  evaluation  of  language
+models[J]. arXiv preprint, arXiv: 2111.02840, 2021
+［10］
+ Papernot N, McDaniel P, Swami A, et al. Crafting adversarial input
+sequences for recurrent neural networks[C]//Proc of the 2016 IEEE
+Military Communications Conf. Piscataway, NJ: IEEE, 2016: 49−54
+［11］
+ Liang  Bin,  Li  Hongcheng,  Su  Miaoqiang,  et  al.  Deep  text
+classification  can  be  fooled[C]//Proc  of  the  27th  Int  Joint  Conf  on
+Artificial Intelligence. Palo Alto, CA: International Joint Conference
+on Artificial Intelligence Organization, 2018: 4208−4215
+［12］
+ Ebrahimi  J,  Rao  A,  Lowd  D,  et  al.  HotFlip:  White-box  adversarial
+examples  for  text  classification[J].  arXiv  preprint,  arXiv:
+1712.06751, 2018
+［13］
+ Li  Jinfeng,  Ji  Shouling,  Du  Tianyu,  et  al.  TextBugger:  Generating
+adversarial  text  against  real-world  applications[J].  arXiv  preprint,
+arXiv: 1812.05271, 2018
+［14］
+ Behjati  M,  Moosavi-Dezfooli  S  M,  Baghshah  M  S,  et  al.  Universal
+adversarial  attacks  on  text  classifiers[C]//Proc  of  the  44th  IEEE  Int
+Conf  on  Acoustics,  Speech  and  Signal  Processing  (ICASSP).
+Piscataway, NJ: IEEE, 2019: 7345−7349
+［15］
+ Wallace  E,  Feng  S,  Kandpal  N,  et  al.  Universal  adversarial  triggers
+for  attacking  and  analyzing  NLP[J].  arXiv  preprint,  arXiv:
+1908.07125, 2021
+［16］
+ Gao  J,  Lanchantin  J,  Soffa  M  L,  et  al.  Black-box  generation  of
+adversarial  text  sequences  to  evade  deep  learning  classifiers[J].
+arXiv preprint, arXiv: 1801.04354, 2018
+［17］
+ Eger S, Şahin G G, Rücklé A, et al. Text processing like humans do:
+Visually  attacking  and  shielding  NLP  systems[C]//Proc  of  the  18th
+Conf of the North American Chapter of the ACL: Human Language
+Technologies (Volume 1: Long and Short Papers). Stroudsburg, PA:
+ACL, 2019: 1634−1647
+［18］
+ Jin  Di,  Jin  Zhijing,  Zhou  J,  et  al.  Is  BERT  really  robust?  A  strong
+baseline  for  natural  language  attack  on  text  classification  and
+entailment[J]. arXiv preprint, arXiv: 1907.11932, 2020
+［19］
+ Li  Linyang,  Ma  Ruotian,  Guo  Qipeng,  et  al.  BERT-Attack:
+Adversarial  attack  against  BERT  using  BERT[J].  arXiv  preprint,
+arXiv: 2004.09984, 2020
+［20］
+ Garg  S,  Ramakrishnan  G.  BAE:  BERT-based  adversarial  examples
+for  text  classification[C]//Proc  of  the  25th  Conf  on  Empirical
+Methods  in  Natural  Language  Processing.  Stroudsburg,  PA:  ACL,
+2020: 6174−6181
+［21］
+ Li Dianqi, Zhang Yizhe, Peng Hao, et al. Contextualized perturbation
+for textual adversarial attack[J]. arXiv preprint, arXiv: 2009.07502,
+2021
+［22］
+ Maheshwary R, Maheshwary S, Pudi V. Generating natural language
+attacks in a hard label black box setting[C]//Proc of the 35th AAAI
+Conf  on  Artificial  Intelligence.  Palo  Alto,  CA:  AAAI,  2021:
+13525−13533
+［23］
+ Ye  Muchao,  Miao  Chenglin,  Wang  Ting,  et  al.  TextHoaxer:
+Budgeted hard-label adversarial attacks on text[C]//Proc of the 36th
+AAAI  Conf  on  Artificial  Intelligence.  Palo  Alto,  CA:  AAAI,  2022:
+3877−3884
+［24］
+ Xu  Lei,  Chen  Yangyi,  Cui  Ganqu,  et  al.  Exploring  the  universal
+vulnerability  of  prompt-based  learning  paradigm[J].  arXiv  preprint,
+arXiv: 2204.05239, 2022
+［25］
+ Xu Lei, Chen Yangyi, Cui Ganqu, et al. A prompting-based approach
+for  adversarial  example  generation  and  robustness  enhancement[J].
+arXiv preprint, arXiv: 2203.10714, 2022
+［26］
+ Liu  Xiao， Zheng  Yanan， Du  Zhengxiao， et  al.  GPT  understands，［27］
+2012 计算机研究与发展　 2025 ，62  （8）

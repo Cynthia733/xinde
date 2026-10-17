@@ -1,0 +1,134 @@
+PA: ACL, 2021: 4348−4356
+ Chen Chuanshuai, Dai Jiazhu. Mitigating backdoor attacks in LSTM-
+based  text  classification  systems  by  backdoor  keyword
+identification[J]. Neurocomputing, 2021, 452: 253−262
+［162］
+ Wang  Yuxia,  Li  Haonan,  Han  Xudong,  et  al.  Do-Not-Answer:  A
+dataset for evaluating safeguards in LLMs[J]. arXiv preprint, arXiv:
+2308.13387, 2023
+［163］
+ Zhang Mi, Pan Xudong, Yang Min. JADE: A linguistics-based safety
+evaluation  platform  for  large  language  models[J].  arXiv  preprint,
+arXiv: 2311.00286, 2023
+［164］
+ Wang  Mengru,  Zhang  Ningyu,  Xu  Ziwen,  et  al.  Detoxifying  large
+language  models  via  knowledge  editing[J].  arXiv  preprint,  arXiv:
+2403.14472, 2024
+［165］
+ Chen  Jiefeng,  Yoon  J,  Ebrahimi  S,  et  al.  Adaptation  with  self-
+evaluation  to  improve  selective  prediction  in  LLMs[J].  arXiv
+preprint, arXiv: 2310.11689, 2023
+［166］
+ Feldman  P,  Foulds  J  R,  Pan  S.  Trapping  LLM  hallucinations  using
+tagged context prompts[J]. arXiv preprint, arXiv: 2306.06085, 2023
+［167］
+ Duan  Haonan,  Dziedzic  A,  Papernot  N,  et  al.  Flocks  of  stochastic
+parrots:  Differentially  private  prompt  learning  for  large  language
+models[J].  Advances  in  Neural  Information  Processing  Systems,
+2023, 36: 76852−76871
+［168］
+ Yu Da, Naik S, Backurs A, et al. Differentially private fine-tuning of
+language models[J]. arXiv preprint, arXiv: 2110.06500, 2022
+［169］
+ Mattern  J,  Jin  Zhijing,  Weggenmann  B,  et  al.  Differentially  private
+language  models  for  secure  data  sharing[J].  arXiv  preprint,  arXiv:
+2210.13918, 2022
+［170］
+ Liu  Xuanqi,  Liu  Zhuotao.  LLMs  can  understand  encrypted  prompt:
+Towards privacy-computing friendly transformers[J]. arXiv preprint,
+arXiv: 2305.18396, 2023
+［171］
+ Li  Yansong,  Tan  Zhixing,  Liu  Yang.  Privacy-preserving  prompt
+tuning  for  large  language  model  services[J].  arXiv  preprint,  arXiv:
+2305.06212, 2023
+［172］
+ Yan Ran, Li Yujun, Li Wenqian, et al. Teach large language models
+to forget privacy[J]. arXiv preprint, arXiv: 2401.00870, 2023
+［173］
+ Ippolito  D,  Tramèr  F,  Nasr  M,  et  al.  Preventing  verbatim
+memorization in language models gives a false sense of privacy[J].
+arXiv preprint, arXiv: 2210.17546, 2023
+［174］
+ Liu  Sijia,  Yao  Yuanshun,  Jia  Jinghan,  et  al.  Rethinking  machine
+unlearning  for  large  language  models[J].  arXiv  preprint,  arXiv:
+2402.08787, 2024
+［175］
+ Jang J, Yoon D, Yang S, et al. Knowledge unlearning for mitigating
+privacy  risks  in  language  models[C]//Proc  of  the  61st  Annual
+Meeting  of  the  ACL  (Volume  1:  Long  Papers).  Stroudsburg,  PA:
+ACL, 2023: 14389−14408
+［176］
+ Chen  Jiaao,  Yang  Diyi.  Unlearn  what  you  want  to  forget:  Efficient
+unlearning  for  LLMs[C]//Proc  of  the  28th  Conf  on  Empirical
+Methods  in  Natural  Language  Processing.  Stroudsburg,  PA:  ACL,
+2023: 12041−12052
+［177］
+ Maini P, Feng Z, Schwarzschild A, et al. TOFU: A task of fictitious
+unlearning for LLMs[J]. arXiv preprint, arXiv: 2401.06121, 2024
+［178］
+ Zhang  Ruiqi,  Lin  Licong,  Bai  Yu,  et  al.  Negative  preference
+optimization:  From  catastrophic  collapse  to  effective  unlearning[J].
+［179］
+arXiv preprint, arXiv: 2404.05868, 2024
+ Tian  Bozhong,  Liang  Xiaozhuan,  Cheng  Siyuan,  et  al.  To  forget  or
+not?  Towards  practical  knowledge  unlearning  for  large  language
+models[C]//Proc of the 29th Conf on Empirical Methods in Natural
+Language Processing. Stroudsburg, PA: ACL, 2024: 1524−1537
+［180］
+ Muresanu A, Thudi A, Zhang M R, et al. Unlearnable algorithms for
+in-context learning[J]. arXiv preprint, arXiv: 2402.00751, 2024
+［181］
+ Cohen  R,  Biran  E,  Yoran  O,  et  al.  Evaluating  the  ripple  effects  of
+knowledge editing in language models[J]. Transactions of the ACL,
+2024, 12: 283−298
+［182］
+ Yan Jianhao, Wang Futing, Li Yafu, et al. Potential and challenges of
+model  editing  for  social  debiasing[J].  arXiv  preprint,  arXiv:
+2402.13462, 2024
+［183］
+ Liu  C  Y,  Wang  Yaxuan,  Flanigan  J,  et  al.  Large  language  model
+unlearning  via  embedding-corrupted  prompts[J].  arXiv  preprint,
+arXiv: 2406.07933, 2024
+［184］
+ Wu  Xinwei,  Li  Junzhuo,  Xu  Minghui,  et  al.  DEPN:  Detecting  and
+editing  privacy  neurons  in  pretrained  language  models[C]//Proc  of
+the  28th  Conf  on  Empirical  Methods  in  Natural  Language
+Processing. Stroudsburg, PA: ACL, 2023: 2875−2886
+［185］
+ Wu Xinwei, Dong Weilong, Xu Shaoyang, et al. Mitigating privacy
+seesaw in large language models: Augmented privacy neuron editing
+via activation patching[C]//Proc of the 62nd Annual Meeting of the
+Association  for  Computational  Linguistics.  Stroudsburg,  PA:  ACL,
+2024: 5319−5332
+［186］
+ Venditti  D,  Ruzzetti  E  S,  Xompero  G  A,  et  al.  Enhancing  data
+privacy  in  large  language  models  through  private  association
+editing[J]. arXiv preprint, arXiv: 2406.18221, 2024
+［187］
+ 
+ 
+Jiang Yi, born in 1982. PhD candidate. Member of 
+CCF.  His  main  research  interests  include  data -
+driven security and privacy, and AI security.
+姜　毅 , 1982 年生 . 博士生研究生 . CCF 会员 .
+主要研究方向为数据驱动安全与隐私 、 人工 
+智能安全 .
+ 
+ 
+Yang Yong, born in 1996. PhD candidate. Member
+of  CCF.  His  main  research  interest  includes  AI 
+security and privacy.
+杨　勇 , 1996 年生 . 博士生研究生 . CCF 会员 .
+主要研究方向为人工智能的安全与隐私 .
+ 
+ 
+Yin  Jiali ,  born  in  1993.  PhD,  professor,  PhD 
+supervisor.  Member  of  CCF.  Her  main  research 
+interests  include  computational  photography,  deep
+feature  fusion  interpretability  of  neural  networks,
+adversarial training.
+印佳丽 , 1993 年生 . 博士 ， 研究员 ， 博士生导 
+师. CCF 会员 . 主要研究方向为计算摄影学 、
+深度特征融合 、 神经网络模型可解释性 、 对
+抗训练 .
+姜毅等：大语言模型安全与隐私风险综述 2017

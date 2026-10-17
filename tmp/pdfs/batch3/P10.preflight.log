@@ -1,0 +1,15 @@
+{
+  "schema": "pdf_read_preflight/1",
+  "verdict": "UNAVAILABLE",
+  "file": "docs\\literature\\人工智能对网络文学的影响：主体危机、镜像扩容及数据依赖_李玉萍.pdf",
+  "sha256": "c1490dfe9bdc9d0c1ef2ff0b319229ef52de16a86c84f51f826d7f791b3c488c",
+  "declared_page_count": 11,
+  "enumerated_page_count": 11,
+  "reader_page_count": 11,
+  "warnings": [
+    "trailing-data: 178 bytes after the final %%EOF include non-whitespace content (possible truncated incremental update)",
+    "pypdf: Multiple definitions in dictionary at byte 0x124c4b for key /MediaBox"
+  ],
+  "generated_at": "2026-09-11T08:10:03.909139+00:00",
+  "tool": "pdf_read_preflight/1.0.0"
+}
